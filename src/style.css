@@ -575,6 +575,75 @@ a.button {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.usage-layout {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.usage-steps {
+  display: grid;
+  gap: 18px;
+}
+
+.usage-step,
+.usage-note {
+  padding: 24px;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  background: rgba(252, 248, 241, 0.74);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+}
+
+.usage-step h3,
+.usage-title {
+  margin: 0;
+  font-size: 1.18rem;
+}
+
+.usage-step p,
+.usage-note p,
+.usage-list {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.usage-command {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.usage-command code,
+.usage-note > code {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  color: #f1f6ff;
+  background: linear-gradient(135deg, #21354d, #4b6c8f);
+}
+
+.usage-aside {
+  display: grid;
+  gap: 18px;
+}
+
+.usage-list {
+  padding-left: 18px;
+}
+
+.usage-note-accent {
+  background:
+    radial-gradient(circle at top right, rgba(213, 170, 122, 0.24), transparent 22%),
+    rgba(252, 248, 241, 0.8);
+}
+
 .faq-list {
   display: grid;
   gap: 14px;
@@ -652,6 +721,7 @@ a.button {
 @media (max-width: 1100px) {
   .hero,
   .workflow-layout,
+  .usage-layout,
   .card-grid,
   .security-grid,
   .trust-strip {
@@ -692,6 +762,8 @@ a.button {
   .hero-text,
   .feature-card p,
   .security-card p,
+  .usage-step p,
+  .usage-note p,
   .faq-item p,
   .timeline span,
   .trust-strip span {

@@ -16,6 +16,7 @@ app.innerHTML = `
       <nav class="nav-links">
         <a href="#capabilities">能力</a>
         <a href="#workflow">流程</a>
+        <a href="#usage">使用</a>
         <a href="#security">本地性</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -189,6 +190,64 @@ app.innerHTML = `
         </div>
       </section>
 
+      <section class="section usage-section" id="usage">
+        <div class="section-heading reveal">
+          <p class="eyebrow">USAGE GUIDE</p>
+          <h2>下载后怎么安装、第一次怎么配置、平时怎么用，这里直接说清楚。</h2>
+        </div>
+        <div class="usage-layout">
+          <div class="usage-steps">
+            <article class="usage-step reveal reveal-delay-1">
+              <span class="feature-index">STEP 01</span>
+              <h3>安装到 Applications</h3>
+              <p>打开 <code>.dmg</code> 或解压 <code>.zip</code>，把 <code>OpenClaw Manager Native.app</code> 拖入 <code>Applications</code>。如果首次被系统拦截，在隐私与安全性里允许打开。</p>
+            </article>
+            <article class="usage-step reveal reveal-delay-2">
+              <span class="feature-index">STEP 02</span>
+              <h3>设置 OpenClaw / Codex 根目录</h3>
+              <p>如果你的 <code>.openclaw</code>、<code>.openclaw-*</code>、<code>.codex</code>、<code>.codex-*</code> 不在默认 Home 根目录下，就在菜单里选择真实父目录。</p>
+              <div class="usage-command">
+                <code>配置 -> 选择 OpenClaw 根目录...</code>
+                <code>配置 -> 选择 Codex 根目录...</code>
+              </div>
+            </article>
+            <article class="usage-step reveal reveal-delay-3">
+              <span class="feature-index">STEP 03</span>
+              <h3>重启服务并刷新界面</h3>
+              <p>修改目录后执行一次重启，让本地 manager 重新扫描并加载状态。</p>
+              <div class="usage-command">
+                <code>配置 -> 重启服务并刷新窗口</code>
+              </div>
+            </article>
+            <article class="usage-step reveal reveal-delay-1">
+              <span class="feature-index">STEP 04</span>
+              <h3>日常管理 profile</h3>
+              <p>之后的使用基本都在主界面完成：查看 active profile、状态、Codex 配置和本地运行结果，需要时再通过菜单查看设置文件或状态目录。</p>
+            </article>
+          </div>
+
+          <aside class="usage-aside reveal reveal-delay-2">
+            <div class="usage-note">
+              <p class="usage-title">默认设置文件</p>
+              <code>~/Library/Application Support/OpenClaw Manager Native/settings.json</code>
+            </div>
+            <div class="usage-note">
+              <p class="usage-title">常用菜单</p>
+              <ul class="usage-list">
+                <li>查看当前配置</li>
+                <li>打开设置文件</li>
+                <li>打开应用数据目录</li>
+                <li>打开 Manager 状态目录</li>
+              </ul>
+            </div>
+            <div class="usage-note usage-note-accent">
+              <p class="usage-title">定位说明</p>
+              <p>它是一个运行在用户自己 Mac 上的第三方本地工具，用来统一管理本地 OpenClaw / Codex 环境，不是远程托管服务。</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
       <section class="section security-section" id="security">
         <div class="section-heading reveal">
           <p class="eyebrow">LOCAL FIRST</p>
@@ -243,7 +302,7 @@ app.innerHTML = `
             下一步可以继续补下载入口、演示视频、客户案例、签名与公证状态说明，以及面向外部发布的联系渠道。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#cta">下载入口待接入</a>
+            <a class="button button-primary" href="#usage">先看使用说明</a>
             <a class="button button-ghost" href="#hero">返回顶部</a>
           </div>
         </div>
