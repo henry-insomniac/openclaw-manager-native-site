@@ -5,13 +5,89 @@ const app = document.querySelector('#app');
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
 const releaseTag = 'v0.1.0-alpha.1';
+const releaseVersionLabel = 'Alpha 0.1.0';
+const releaseBuildLabel = '2026-03-09 构建';
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
 const downloads = {
   dmg: `${releaseBase}/OpenClawManagerNative-latest-arm64.dmg`,
+  pkg: `${releaseBase}/OpenClawManagerNative-latest-arm64.pkg`,
   zip: `${releaseBase}/OpenClawManagerNative-latest-arm64.zip`,
   delivery: `${releaseBase}/OpenClawManagerNative-latest-delivery.zip`,
 };
+
+const changelogEntries = [
+  {
+    version: 'v0.1.0-alpha.1',
+    date: '2026-03-09',
+    title: 'Alpha 对外下载包整理完成',
+    summary: '对外分发入口统一到了 GitHub Release，官网按钮现在会直接落到当前可下载的 DMG、PKG、ZIP 和完整交付包。',
+    highlights: [
+      '新增 PKG 安装包，适合偏安装器习惯的测试用户。',
+      '保留 DMG、ZIP 和完整交付包，覆盖不同使用场景。',
+      '官网现在显示真实下载入口，而不是占位链接。'
+    ]
+  },
+  {
+    version: 'ui refresh',
+    date: '2026-03-09',
+    title: '主界面改成低信息密度布局',
+    summary: '默认视图改成更接近 macOS 偏好设置的结构，首屏只保留账号、状态、额度和操作，把路径和内部配置折叠到高级信息里。',
+    highlights: [
+      '左侧变成简洁工作区导航。',
+      '账号详情默认只显示必要信息。',
+      '高级路径、Codex/OpenClaw 细节收进折叠区。'
+    ]
+  },
+  {
+    version: 'stability',
+    date: '2026-03-09',
+    title: '增加菜单栏入口与稳定守护',
+    summary: '应用关闭主窗口后仍可驻留在菜单栏，并提供后台稳定守护能力，用来自动恢复 OpenClaw 网关和明显卡死场景。',
+    highlights: [
+      '菜单栏可直接查看当前账号和自动化状态。',
+      '支持一键巡检和推荐切换。',
+      'Watchdog 能自动拉起掉线服务。'
+    ]
+  },
+  {
+    version: 'native baseline',
+    date: '2026-03-09',
+    title: '原生 macOS 交付链打通',
+    summary: '从依赖 Docker 的管理台，收敛成真正可分发的 macOS 原生应用，内置本地 runtime，面向测试用户不再要求额外安装 Docker 或 Node。',
+    highlights: [
+      'Swift 原生 app + 内置 runtime。',
+      '支持 DMG、ZIP、PKG 和交付包。',
+      '根目录选择、服务重启、日志入口都放进 app。'
+    ]
+  },
+  {
+    version: 'foundation',
+    date: '2026-03-08',
+    title: '账号切换与自动化基础完成',
+    summary: '建立 OpenClaw / Codex 多 profile 管理、推荐切换和自动巡检的基础能力，解决本地多账号配置的可视化管理问题。',
+    highlights: [
+      '支持 profile 创建、登录、探测、激活。',
+      '支持 OpenClaw 与 Codex 同步切换。',
+      '支持自动化阈值和推荐账号逻辑。'
+    ]
+  }
+];
+
+const changelogRailMarkup = changelogEntries
+  .map(
+    (entry, index) => `
+      <button class="changelog-item ${index === 0 ? 'changelog-item-active' : ''}" type="button" data-changelog-index="${index}">
+        <span class="changelog-item-date">${entry.date}</span>
+        <strong>${entry.title}</strong>
+        <small>${entry.version}</small>
+      </button>
+    `
+  )
+  .join('');
+
+const initialChangelog = changelogEntries[0];
+const initialChangelogList = initialChangelog.highlights.map((item) => `<li>${item}</li>`).join('');
 
 app.innerHTML = `
   <div class="site-shell">
@@ -28,6 +104,7 @@ app.innerHTML = `
         <a href="#capabilities">能力</a>
         <a href="#workflow">流程</a>
         <a href="#downloads">下载</a>
+        <a href="#changelog">更新</a>
         <a href="#usage">使用</a>
         <a href="#security">本地性</a>
         <a href="#faq">FAQ</a>
@@ -175,7 +252,7 @@ app.innerHTML = `
           <article class="feature-card reveal reveal-delay-2">
             <span class="feature-index">05</span>
             <h3>面向交付</h3>
-            <p>支持 <code>.app</code>、<code>.zip</code>、<code>.dmg</code> 分发链路，后续可继续接 <code>Developer ID</code>、notarization 与正式商用分发流程。</p>
+            <p>支持 <code>.app</code>、<code>.zip</code>、<code>.dmg</code>、<code>.pkg</code> 分发链路，后续可继续接 <code>Developer ID</code>、notarization 与正式商用分发流程。</p>
           </article>
           <article class="feature-card reveal reveal-delay-3">
             <span class="feature-index">06</span>
@@ -224,7 +301,7 @@ app.innerHTML = `
             </div>
             <div class="compare-row">
               <span>很难交付给普通用户</span>
-              <strong>支持 <code>.app</code> / <code>.zip</code> / <code>.dmg</code></strong>
+              <strong>支持 <code>.app</code> / <code>.zip</code> / <code>.dmg</code> / <code>.pkg</code></strong>
             </div>
           </div>
         </div>
@@ -233,7 +310,7 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <p class="eyebrow">DOWNLOADS</p>
-          <h2>现在就能下载 alpha 测试包，推荐从 DMG 开始。</h2>
+          <h2>现在官网提供 4 种下载方式，第一次测试优先从 DMG 开始。</h2>
         </div>
         <div class="download-grid">
           <article class="download-card reveal reveal-delay-1">
@@ -250,19 +327,32 @@ app.innerHTML = `
             </div>
           </article>
           <article class="download-card reveal reveal-delay-2">
+            <span class="feature-index">INSTALLER</span>
+            <h3>PKG 安装包</h3>
+            <p>适合习惯安装器流程的测试用户。安装后会把应用放到标准位置，更适合直接发给别人测试。</p>
+            <ul class="download-list">
+              <li>更接近传统 macOS 安装流程</li>
+              <li>适合引导式安装</li>
+              <li>当前仍属于 alpha 包</li>
+            </ul>
+            <div class="download-actions">
+              <a class="button button-ghost" href="${downloads.pkg}" target="_blank" rel="noreferrer">下载 PKG</a>
+            </div>
+          </article>
+          <article class="download-card reveal reveal-delay-3">
             <span class="feature-index">DIRECT APP ZIP</span>
             <h3>ZIP 安装包</h3>
             <p>适合已经熟悉 macOS 应用分发方式的测试者。解压后把 app 拖进 <code>Applications</code> 即可。</p>
             <ul class="download-list">
-              <li>文件更直接</li>
-              <li>适合内部快速分发</li>
+              <li>适合熟悉 Mac 的测试用户</li>
               <li>和 DMG 一样属于当前 alpha 构建</li>
+              <li>适合手动分发 app</li>
             </ul>
             <div class="download-actions">
               <a class="button button-ghost" href="${downloads.zip}" target="_blank" rel="noreferrer">下载 ZIP</a>
             </div>
           </article>
-          <article class="download-card reveal reveal-delay-3">
+          <article class="download-card reveal reveal-delay-1">
             <span class="feature-index">FULL BUNDLE</span>
             <h3>完整交付包</h3>
             <p>除了安装包，还额外包含 <code>INSTALL.md</code>、<code>ALPHA-TEST.md</code> 和项目说明，适合你直接发给内测用户。</p>
@@ -277,11 +367,32 @@ app.innerHTML = `
           </article>
         </div>
         <div class="download-note reveal">
-          <p><strong>当前版本：</strong> Alpha 0.1.0</p>
+          <p><strong>当前版本：</strong> ${releaseVersionLabel} · ${releaseBuildLabel}</p>
           <p><strong>已知限制：</strong> 当前仅支持 Apple Silicon / arm64；由于还没有 Developer ID 公证，第一次打开时可能需要在 <code>系统设置 -> 隐私与安全性</code> 中手动允许。</p>
           <div class="download-actions">
             <a class="button button-ghost" href="${releasePage}" target="_blank" rel="noreferrer">查看 GitHub Release</a>
           </div>
+        </div>
+      </section>
+
+      <section class="section changelog-section" id="changelog">
+        <div class="section-heading reveal">
+          <p class="eyebrow">CHANGELOG</p>
+          <h2>每个版本做了什么，可以直接在这里按时间线查看。</h2>
+        </div>
+        <div class="changelog-layout">
+          <div class="changelog-rail reveal reveal-delay-1">
+            ${changelogRailMarkup}
+          </div>
+          <article class="changelog-panel reveal reveal-delay-2">
+            <div class="changelog-meta">
+              <span class="changelog-version" data-changelog-version>${initialChangelog.version}</span>
+              <span class="changelog-date" data-changelog-date>${initialChangelog.date}</span>
+            </div>
+            <h3 data-changelog-title>${initialChangelog.title}</h3>
+            <p class="changelog-summary" data-changelog-summary>${initialChangelog.summary}</p>
+            <ul class="changelog-list" data-changelog-list>${initialChangelogList}</ul>
+          </article>
         </div>
       </section>
 
@@ -395,7 +506,7 @@ app.innerHTML = `
           </details>
           <details class="faq-item reveal reveal-delay-2">
             <summary>最终用户需要 Docker 吗？</summary>
-            <p>不需要。原生版内置了 app 运行需要的本地 runtime，面向最终用户的交付方式是 <code>.app</code>、<code>.zip</code> 和 <code>.dmg</code>。</p>
+            <p>不需要。原生版内置了 app 运行需要的本地 runtime，面向最终用户的交付方式是 <code>.app</code>、<code>.zip</code>、<code>.dmg</code> 和 <code>.pkg</code>。</p>
           </details>
           <details class="faq-item reveal reveal-delay-3">
             <summary>第一次打开没看到 profile，最先检查什么？</summary>
@@ -474,3 +585,33 @@ const numberObserver = new IntersectionObserver(
 );
 
 numbers.forEach((element) => numberObserver.observe(element));
+
+
+const changelogButtons = document.querySelectorAll('[data-changelog-index]');
+const changelogVersion = document.querySelector('[data-changelog-version]');
+const changelogDate = document.querySelector('[data-changelog-date]');
+const changelogTitle = document.querySelector('[data-changelog-title]');
+const changelogSummary = document.querySelector('[data-changelog-summary]');
+const changelogList = document.querySelector('[data-changelog-list]');
+
+const setActiveChangelog = (index) => {
+  const entry = changelogEntries[index];
+  if (!entry || !changelogVersion || !changelogDate || !changelogTitle || !changelogSummary || !changelogList) return;
+
+  changelogButtons.forEach((button, buttonIndex) => {
+    button.classList.toggle('changelog-item-active', buttonIndex === index);
+  });
+
+  changelogVersion.textContent = entry.version;
+  changelogDate.textContent = entry.date;
+  changelogTitle.textContent = entry.title;
+  changelogSummary.textContent = entry.summary;
+  changelogList.innerHTML = entry.highlights.map((item) => `<li>${item}</li>`).join('');
+};
+
+changelogButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const index = Number(button.dataset.changelogIndex || '0');
+    setActiveChangelog(index);
+  });
+});

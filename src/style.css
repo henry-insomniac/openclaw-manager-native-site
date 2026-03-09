@@ -649,7 +649,7 @@ a.button {
 
 .download-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -695,6 +695,129 @@ a.button {
 
 .download-note strong {
   color: var(--ink);
+}
+
+.changelog-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.changelog-rail {
+  position: relative;
+  display: grid;
+  gap: 12px;
+}
+
+.changelog-rail::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(22, 35, 49, 0.18), rgba(181, 106, 46, 0.16));
+}
+
+.changelog-item {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  padding: 16px 18px 16px 42px;
+  border: 1px solid rgba(22, 35, 49, 0.08);
+  border-radius: 22px;
+  background: rgba(252, 248, 241, 0.72);
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.changelog-item::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 21px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(181, 106, 46, 0.32);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.92);
+}
+
+.changelog-item:hover {
+  transform: translateX(4px);
+  border-color: rgba(181, 106, 46, 0.22);
+}
+
+.changelog-item-active {
+  border-color: rgba(181, 106, 46, 0.3);
+  background: rgba(255, 250, 244, 0.96);
+  box-shadow: var(--shadow);
+}
+
+.changelog-item-active::before {
+  background: var(--accent);
+}
+
+.changelog-item-date,
+.changelog-item small,
+.changelog-version,
+.changelog-date {
+  color: var(--muted);
+}
+
+.changelog-item strong {
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.changelog-panel {
+  padding: 28px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  background: rgba(252, 248, 241, 0.82);
+  box-shadow: var(--shadow);
+}
+
+.changelog-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.changelog-version {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 35, 49, 0.08);
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: 700;
+}
+
+.changelog-date {
+  font-weight: 600;
+}
+
+.changelog-panel h3 {
+  margin: 18px 0 0;
+  font-size: 1.55rem;
+}
+
+.changelog-summary,
+.changelog-list {
+  margin: 14px 0 0;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+.changelog-list {
+  padding-left: 20px;
 }
 
 .usage-layout {
@@ -851,6 +974,7 @@ a.button {
   .card-grid,
   .security-grid,
   .download-grid,
+  .changelog-layout,
   .trust-strip {
     grid-template-columns: 1fr;
   }
