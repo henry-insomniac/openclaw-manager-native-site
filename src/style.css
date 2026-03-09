@@ -83,7 +83,8 @@ a.button {
 .section,
 .trust-strip,
 .cta-section,
-.hero {
+.hero,
+.alpha-banner {
   width: min(calc(100% - 32px), var(--content));
   margin: 0 auto;
 }
@@ -410,6 +411,77 @@ a.button {
 .console-panel code {
   font-family: "SF Mono", "Menlo", monospace;
   font-size: 0.86rem;
+}
+
+.alpha-banner {
+  display: grid;
+  grid-template-columns: 1.06fr 0.94fr;
+  gap: 20px;
+  align-items: stretch;
+  margin-top: 18px;
+  padding: 28px;
+  border-radius: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  background:
+    radial-gradient(circle at top right, rgba(181, 106, 46, 0.24), transparent 24%),
+    linear-gradient(135deg, rgba(24, 36, 51, 0.95), rgba(52, 88, 124, 0.92));
+  color: #f6efe3;
+  box-shadow: 0 26px 58px rgba(22, 35, 49, 0.16);
+}
+
+.alpha-banner .eyebrow {
+  color: #f0c48d;
+}
+
+.alpha-banner-copy h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3.2vw, 3.3rem);
+  line-height: 1.03;
+  font-family: "Iowan Old Style", "Georgia", serif;
+  letter-spacing: -0.03em;
+}
+
+.alpha-banner-copy p:not(.eyebrow),
+.alpha-banner-points span {
+  color: rgba(246, 239, 227, 0.84);
+  line-height: 1.8;
+}
+
+.alpha-banner-points {
+  display: grid;
+  gap: 14px;
+}
+
+.alpha-banner-points article {
+  padding: 18px 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(246, 239, 227, 0.08);
+}
+
+.alpha-banner-points strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #fff9f0;
+  font-size: 1rem;
+}
+
+.alpha-banner-points code {
+  color: #ffdeba;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.alpha-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.alpha-banner-actions .button-ghost {
+  color: #f7efdf;
+  border-color: rgba(247, 239, 223, 0.18);
+  background: rgba(247, 239, 223, 0.08);
 }
 
 .trust-strip {
@@ -773,6 +845,7 @@ a.button {
 
 @media (max-width: 1100px) {
   .hero,
+  .alpha-banner,
   .workflow-layout,
   .usage-layout,
   .card-grid,
@@ -805,7 +878,8 @@ a.button {
   .hero,
   .section,
   .trust-strip,
-  .cta-section {
+  .cta-section,
+  .alpha-banner {
     width: min(calc(100% - 20px), var(--content));
   }
 
@@ -820,7 +894,9 @@ a.button {
   .usage-note p,
   .faq-item p,
   .timeline span,
-  .trust-strip span {
+  .trust-strip span,
+  .alpha-banner-copy p:not(.eyebrow),
+  .alpha-banner-points span {
     font-size: 0.98rem;
   }
 
@@ -839,7 +915,8 @@ a.button {
   .feature-card,
   .security-card,
   .compare-card,
-  .trust-strip > div {
+  .trust-strip > div,
+  .alpha-banner {
     padding: 22px;
   }
 }

@@ -107,6 +107,34 @@ app.innerHTML = `
         </div>
       </section>
 
+      <section class="alpha-banner reveal" aria-label="alpha 提示">
+        <div class="alpha-banner-copy">
+          <p class="eyebrow">ALPHA NOTICE</p>
+          <h2>这是面向小范围测试用户的 alpha 版本，不是已经公证的正式公开版。</h2>
+          <p>
+            如果你准备把链接发给别人，至少先告诉对方这 3 件事：当前只支持 Apple Silicon / arm64；第一次打开可能需要到 <code>系统设置 -> 隐私与安全性</code> 里手动允许一次；如果界面没显示 profile，请在菜单里设置 OpenClaw 和 Codex 根目录后执行一次“重启服务并刷新窗口”。
+          </p>
+        </div>
+        <div class="alpha-banner-points">
+          <article>
+            <strong>安装前先看</strong>
+            <span>适用于 macOS 13+ 与 Apple Silicon 机器，Intel Mac 当前不在支持范围内。</span>
+          </article>
+          <article>
+            <strong>第一次打开被拦截</strong>
+            <span>到系统安全设置里允许一次，然后再回到 Applications 重新启动 app。</span>
+          </article>
+          <article>
+            <strong>页面没显示 profile</strong>
+            <span>根目录选“包含 <code>.openclaw</code> / <code>.codex</code> 的父目录”，改完后执行一次重启。</span>
+          </article>
+          <div class="alpha-banner-actions">
+            <a class="button button-primary" href="#downloads">先下 DMG</a>
+            <a class="button button-ghost" href="#usage">看首次使用步骤</a>
+          </div>
+        </div>
+      </section>
+
       <section class="trust-strip reveal">
         <div>
           <strong>为本地工作流而设计</strong>
