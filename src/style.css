@@ -575,6 +575,56 @@ a.button {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.download-card {
+  padding: 24px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.46);
+  background: rgba(252, 248, 241, 0.78);
+  box-shadow: var(--shadow);
+}
+
+.download-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.download-card p,
+.download-note p,
+.download-list {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.download-list {
+  padding-left: 18px;
+}
+
+.download-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.download-note {
+  margin-top: 18px;
+  padding: 24px 26px;
+  border-radius: 28px;
+  border: 1px solid rgba(22, 35, 49, 0.08);
+  background: linear-gradient(135deg, rgba(33, 52, 72, 0.08), rgba(181, 106, 46, 0.12));
+}
+
+.download-note strong {
+  color: var(--ink);
+}
+
 .usage-layout {
   display: grid;
   grid-template-columns: 1.08fr 0.92fr;
@@ -727,6 +777,7 @@ a.button {
   .usage-layout,
   .card-grid,
   .security-grid,
+  .download-grid,
   .trust-strip {
     grid-template-columns: 1fr;
   }

@@ -2,6 +2,17 @@ import './style.css';
 
 const app = document.querySelector('#app');
 
+const releaseOwner = 'henry-insomniac';
+const releaseRepo = 'openclaw-manager-native';
+const releaseTag = 'v0.1.0-alpha.1';
+const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
+const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
+const downloads = {
+  dmg: `${releaseBase}/OpenClawManagerNative-latest-arm64.dmg`,
+  zip: `${releaseBase}/OpenClawManagerNative-latest-arm64.zip`,
+  delivery: `${releaseBase}/OpenClawManagerNative-latest-delivery.zip`,
+};
+
 app.innerHTML = `
   <div class="site-shell">
     <div class="noise"></div>
@@ -16,11 +27,12 @@ app.innerHTML = `
       <nav class="nav-links">
         <a href="#capabilities">能力</a>
         <a href="#workflow">流程</a>
+        <a href="#downloads">下载</a>
         <a href="#usage">使用</a>
         <a href="#security">本地性</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="nav-cta" href="#cta">开始测试</a>
+      <a class="nav-cta" href="#downloads">立即下载</a>
     </header>
 
     <main>
@@ -32,7 +44,7 @@ app.innerHTML = `
             OpenClaw Manager Native 面向 macOS，专门解决多 profile、目录分散、手动切换、登录回调和本地运行环境维护这些日常问题。它本地运行、不依赖 Docker、不要求额外安装 Node。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#cta">获取测试包</a>
+            <a class="button button-primary" href="#downloads">下载 Alpha</a>
             <a class="button button-ghost" href="#workflow">查看工作方式</a>
           </div>
           <ul class="hero-points">
@@ -190,6 +202,61 @@ app.innerHTML = `
         </div>
       </section>
 
+      <section class="section downloads-section" id="downloads">
+        <div class="section-heading reveal">
+          <p class="eyebrow">DOWNLOADS</p>
+          <h2>现在就能下载 alpha 测试包，推荐从 DMG 开始。</h2>
+        </div>
+        <div class="download-grid">
+          <article class="download-card reveal reveal-delay-1">
+            <span class="feature-index">RECOMMENDED</span>
+            <h3>DMG 安装包</h3>
+            <p>最适合第一次测试。打开镜像后，把 <code>OpenClaw Manager Native.app</code> 拖到 <code>Applications</code> 即可。</p>
+            <ul class="download-list">
+              <li>适合第一次安装</li>
+              <li>当前为 Apple Silicon / arm64</li>
+              <li>首次打开可能需要在系统里允许一次</li>
+            </ul>
+            <div class="download-actions">
+              <a class="button button-primary" href="${downloads.dmg}" target="_blank" rel="noreferrer">下载 DMG</a>
+            </div>
+          </article>
+          <article class="download-card reveal reveal-delay-2">
+            <span class="feature-index">DIRECT APP ZIP</span>
+            <h3>ZIP 安装包</h3>
+            <p>适合已经熟悉 macOS 应用分发方式的测试者。解压后把 app 拖进 <code>Applications</code> 即可。</p>
+            <ul class="download-list">
+              <li>文件更直接</li>
+              <li>适合内部快速分发</li>
+              <li>和 DMG 一样属于当前 alpha 构建</li>
+            </ul>
+            <div class="download-actions">
+              <a class="button button-ghost" href="${downloads.zip}" target="_blank" rel="noreferrer">下载 ZIP</a>
+            </div>
+          </article>
+          <article class="download-card reveal reveal-delay-3">
+            <span class="feature-index">FULL BUNDLE</span>
+            <h3>完整交付包</h3>
+            <p>除了安装包，还额外包含 <code>INSTALL.md</code>、<code>ALPHA-TEST.md</code> 和项目说明，适合你直接发给内测用户。</p>
+            <ul class="download-list">
+              <li>适合转发给测试者</li>
+              <li>包含安装和排障说明</li>
+              <li>不需要你再手写操作步骤</li>
+            </ul>
+            <div class="download-actions">
+              <a class="button button-ghost" href="${downloads.delivery}" target="_blank" rel="noreferrer">下载交付包</a>
+            </div>
+          </article>
+        </div>
+        <div class="download-note reveal">
+          <p><strong>当前版本：</strong> Alpha 0.1.0</p>
+          <p><strong>已知限制：</strong> 当前仅支持 Apple Silicon / arm64；由于还没有 Developer ID 公证，第一次打开时可能需要在 <code>系统设置 -> 隐私与安全性</code> 中手动允许。</p>
+          <div class="download-actions">
+            <a class="button button-ghost" href="${releasePage}" target="_blank" rel="noreferrer">查看 GitHub Release</a>
+          </div>
+        </div>
+      </section>
+
       <section class="section usage-section" id="usage">
         <div class="section-heading reveal">
           <p class="eyebrow">USAGE GUIDE</p>
@@ -320,13 +387,13 @@ app.innerHTML = `
       <section class="cta-section reveal" id="cta">
         <div class="cta-card">
           <p class="eyebrow">READY TO TEST</p>
-          <h2>如果你要向别人展示这款软件，这个官网已经可以作为第一版产品落地页。</h2>
+          <h2>现在这款软件已经有可下载的 alpha 包，可以直接进入小范围内测。</h2>
           <p>
-            下一步可以继续补下载入口、演示视频、客户案例、签名与公证状态说明，以及面向外部发布的联系渠道。
+            如果你要把它发给测试用户，优先发送完整交付包；如果你只是自己测试，直接下载 DMG 即可。当前版本仍建议面向熟悉 macOS 的 alpha 用户，而不是陌生大众。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#usage">先看使用说明</a>
-            <a class="button button-ghost" href="#hero">返回顶部</a>
+            <a class="button button-primary" href="${downloads.dmg}" target="_blank" rel="noreferrer">下载 DMG</a>
+            <a class="button button-ghost" href="${releasePage}" target="_blank" rel="noreferrer">查看 Release</a>
           </div>
         </div>
       </section>
