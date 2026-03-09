@@ -193,56 +193,75 @@ app.innerHTML = `
       <section class="section usage-section" id="usage">
         <div class="section-heading reveal">
           <p class="eyebrow">USAGE GUIDE</p>
-          <h2>下载后怎么安装、第一次怎么配置、平时怎么用，这里直接说清楚。</h2>
+          <h2>如果这是你第一次使用，按下面顺序做，基本不会走偏。</h2>
         </div>
         <div class="usage-layout">
           <div class="usage-steps">
             <article class="usage-step reveal reveal-delay-1">
               <span class="feature-index">STEP 01</span>
-              <h3>安装到 Applications</h3>
-              <p>打开 <code>.dmg</code> 或解压 <code>.zip</code>，把 <code>OpenClaw Manager Native.app</code> 拖入 <code>Applications</code>。如果首次被系统拦截，在隐私与安全性里允许打开。</p>
+              <h3>先把 app 安装到 Applications</h3>
+              <p>推荐优先使用 <code>.dmg</code>。打开镜像后，把 <code>OpenClaw Manager Native.app</code> 拖到 <code>Applications</code>。如果你拿到的是 <code>.zip</code>，先解压，再拖进去。</p>
             </article>
             <article class="usage-step reveal reveal-delay-2">
               <span class="feature-index">STEP 02</span>
-              <h3>设置 OpenClaw / Codex 根目录</h3>
-              <p>如果你的 <code>.openclaw</code>、<code>.openclaw-*</code>、<code>.codex</code>、<code>.codex-*</code> 不在默认 Home 根目录下，就在菜单里选择真实父目录。</p>
+              <h3>第一次打开如果被拦截，先在系统里允许</h3>
+              <p>如果 macOS 提示应用无法直接打开，到 <code>系统设置 -> 隐私与安全性</code> 里允许，然后回到 <code>Applications</code> 重新启动。这个动作通常只需要第一次做。</p>
+            </article>
+            <article class="usage-step reveal reveal-delay-3">
+              <span class="feature-index">STEP 03</span>
+              <h3>先看主界面有没有直接显示 profile</h3>
+              <p>如果你的 <code>.openclaw</code> 和 <code>.codex</code> 本来就在默认 Home 根目录下，软件可能已经能直接识别。你先看界面里有没有 profile 卡片、active profile 和状态信息。</p>
+            </article>
+            <article class="usage-step reveal reveal-delay-1">
+              <span class="feature-index">STEP 04</span>
+              <h3>如果没显示正确内容，再去设置根目录</h3>
+              <p>最常见的问题不是软件坏了，而是 OpenClaw / Codex 根目录没有指到正确的父目录。根目录应该选“包含这些隐藏目录的那一层”，而不是直接选目录本身。</p>
               <div class="usage-command">
                 <code>配置 -> 选择 OpenClaw 根目录...</code>
                 <code>配置 -> 选择 Codex 根目录...</code>
               </div>
             </article>
-            <article class="usage-step reveal reveal-delay-3">
-              <span class="feature-index">STEP 03</span>
-              <h3>重启服务并刷新界面</h3>
-              <p>修改目录后执行一次重启，让本地 manager 重新扫描并加载状态。</p>
+            <article class="usage-step reveal reveal-delay-2">
+              <span class="feature-index">STEP 05</span>
+              <h3>改完目录后，执行一次重启</h3>
+              <p>每次你修改完根目录，都执行一次重启，让本地 manager 重新扫描并加载最新状态。否则界面可能还停留在旧结果。</p>
               <div class="usage-command">
                 <code>配置 -> 重启服务并刷新窗口</code>
               </div>
             </article>
-            <article class="usage-step reveal reveal-delay-1">
-              <span class="feature-index">STEP 04</span>
-              <h3>日常管理 profile</h3>
-              <p>之后的使用基本都在主界面完成：查看 active profile、状态、Codex 配置和本地运行结果，需要时再通过菜单查看设置文件或状态目录。</p>
+            <article class="usage-step reveal reveal-delay-3">
+              <span class="feature-index">STEP 06</span>
+              <h3>看到 profile 和状态，就说明第一次配置成功了</h3>
+              <p>第一次配置成功最明显的标志，就是主界面开始出现 profile 卡片、active profile、OpenClaw 状态和 Codex 对应信息。之后日常基本都在主界面完成。</p>
             </article>
           </div>
 
           <aside class="usage-aside reveal reveal-delay-2">
             <div class="usage-note">
+              <p class="usage-title">根目录到底该选哪一层</p>
+              <p>规则很简单：</p>
+              <ul class="usage-list">
+                <li>OpenClaw 根目录：选包含 <code>.openclaw</code> / <code>.openclaw-*</code> 的父目录</li>
+                <li>Codex 根目录：选包含 <code>.codex</code> / <code>.codex-*</code> 的父目录</li>
+                <li>不要直接选 <code>.openclaw</code> 或 <code>.codex</code> 本身</li>
+              </ul>
+            </div>
+            <div class="usage-note">
+              <p class="usage-title">第一次成功的标志</p>
+              <ul class="usage-list">
+                <li>主界面出现 profile 卡片</li>
+                <li>可以看到 active profile</li>
+                <li>可以看到 OpenClaw 状态</li>
+                <li>可以看到 Codex 对应状态或目录</li>
+              </ul>
+            </div>
+            <div class="usage-note">
               <p class="usage-title">默认设置文件</p>
               <code>~/Library/Application Support/OpenClaw Manager Native/settings.json</code>
             </div>
-            <div class="usage-note">
-              <p class="usage-title">常用菜单</p>
-              <ul class="usage-list">
-                <li>查看当前配置</li>
-                <li>打开设置文件</li>
-                <li>打开应用数据目录</li>
-                <li>打开 Manager 状态目录</li>
-              </ul>
-            </div>
             <div class="usage-note usage-note-accent">
-              <p class="usage-title">定位说明</p>
-              <p>它是一个运行在用户自己 Mac 上的第三方本地工具，用来统一管理本地 OpenClaw / Codex 环境，不是远程托管服务。</p>
+              <p class="usage-title">如果你完全不确定目录在哪</p>
+              <p>先从你的用户目录开始看，也就是 <code>/Users/你的用户名</code>。如果之前一直在默认方式下使用 OpenClaw / Codex，大多数情况下根目录就是这里。</p>
             </div>
           </aside>
         </div>
@@ -284,12 +303,16 @@ app.innerHTML = `
             <p>不需要。原生版内置了 app 运行需要的本地 runtime，面向最终用户的交付方式是 <code>.app</code>、<code>.zip</code> 和 <code>.dmg</code>。</p>
           </details>
           <details class="faq-item reveal reveal-delay-3">
-            <summary>它适合什么样的人？</summary>
-            <p>适合频繁维护 OpenClaw / Codex 配置、需要多 profile 管理、希望把本地工作流做得更稳定的人。</p>
+            <summary>第一次打开没看到 profile，最先检查什么？</summary>
+            <p>先检查 OpenClaw 根目录和 Codex 根目录是不是指向了正确的父目录；然后执行一次 <code>配置 -> 重启服务并刷新窗口</code>。</p>
           </details>
           <details class="faq-item reveal reveal-delay-1">
-            <summary>官网现在最重要的卖点是什么？</summary>
-            <p>macOS 原生、本地自托管、无需 Docker、无需额外安装 Node、能把本地配置和切换流程收敛进一个清晰的管理台。</p>
+            <summary>根目录到底要选目录本身，还是它的父目录？</summary>
+            <p>选父目录。比如你看到了 <code>/Users/你的用户名/.openclaw</code>，那 OpenClaw 根目录应该选 <code>/Users/你的用户名</code>，而不是直接选 <code>.openclaw</code>。</p>
+          </details>
+          <details class="faq-item reveal reveal-delay-2">
+            <summary>它适合什么样的人？</summary>
+            <p>适合频繁维护 OpenClaw / Codex 配置、需要多 profile 管理、希望把本地工作流做得更稳定的人。</p>
           </details>
         </div>
       </section>

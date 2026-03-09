@@ -621,11 +621,14 @@ a.button {
 .usage-note > code {
   display: inline-flex;
   align-items: center;
-  width: fit-content;
+  width: 100%;
   min-height: 38px;
-  padding: 0 14px;
-  border-radius: 999px;
+  padding: 10px 14px;
+  border-radius: 18px;
   color: #f1f6ff;
+  line-height: 1.6;
+  white-space: normal;
+  overflow-wrap: anywhere;
   background: linear-gradient(135deg, #21354d, #4b6c8f);
 }
 
