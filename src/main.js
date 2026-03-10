@@ -4,16 +4,17 @@ const app = document.querySelector('#app');
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
+const releaseTag = 'v1.0.1';
 const releaseVersionLabel = '1.0.1 热修版';
 const releaseBuildLabel = '2026-03-10 Hotfix';
-const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/latest/download`;
-const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/latest`;
+const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
+const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
 const downloads = {
-  dmg: `${releaseBase}/OpenClawManagerNative-latest-arm64.dmg`,
-  pkg: `${releaseBase}/OpenClawManagerNative-latest-arm64.pkg`,
-  zip: `${releaseBase}/OpenClawManagerNative-latest-arm64.zip`,
+  dmg: `${releaseBase}/OpenClaw.Manager.Native-1.0.1-arm64.dmg`,
+  pkg: `${releaseBase}/OpenClaw.Manager.Native-1.0.1-arm64.pkg`,
+  zip: `${releaseBase}/OpenClaw.Manager.Native-1.0.1-arm64-mac.zip`,
   delivery: `${releaseBase}/OpenClawManagerNative-latest-delivery.zip`,
-  checksums: `${releaseBase}/OpenClawManagerNative-latest-SHA256SUMS.txt`,
+  checksums: `${releaseBase}/OpenClawManagerNative-1.0.1-SHA256SUMS.txt`,
 };
 
 const changelogEntries = [
