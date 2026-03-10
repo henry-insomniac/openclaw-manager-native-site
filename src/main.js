@@ -4,8 +4,8 @@ const app = document.querySelector('#app');
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseVersionLabel = '1.0.0 正式版';
-const releaseBuildLabel = '2026-03-10 构建';
+const releaseVersionLabel = '1.0.1 热修版';
+const releaseBuildLabel = '2026-03-10 Hotfix';
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/latest/download`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/latest`;
 const downloads = {
@@ -17,6 +17,17 @@ const downloads = {
 };
 
 const changelogEntries = [
+  {
+    version: 'v1.0.1',
+    date: '2026-03-10',
+    title: '1.0.1 诊断热修复',
+    summary: '修复安装版与最新构建都显示为 1.0.0 导致的版本混淆，同时把诊断中心的根因判断和修复动作进一步收紧到发布态。',
+    highlights: [
+      '原生 app 版本展示改为直接读取 Bundle 版本，不再手写静态版本文案。',
+      '修复诊断中心在旧安装版中仍显示旧反馈的问题，新的发布包统一切到 1.0.1。',
+      '继续保留随机探测窗口、原生 daemon 和根因修复面板。'
+    ]
+  },
   {
     version: 'v1.0.0',
     date: '2026-03-10',
@@ -189,7 +200,7 @@ app.innerHTML = `
       <section class="alpha-banner reveal" aria-label="正式版提示">
         <div class="alpha-banner-copy">
           <p class="eyebrow">RELEASE NOTE</p>
-          <h2>这是 1.0 正式版，核心能力已经收口到可直接分发的原生桌面应用。</h2>
+          <h2>这是 1.0.1 热修版，核心能力已经收口到可直接分发的原生桌面应用。</h2>
           <p>
             如果你准备把链接发给别人，建议一并转发完整交付包与校验清单。当前仍以 Apple Silicon / arm64 为正式支持目标；如果你分发的是未公证包，第一次打开可能仍需要到 <code>系统设置 -> 隐私与安全性</code> 里手动允许一次。
           </p>
@@ -517,7 +528,7 @@ app.innerHTML = `
           </details>
           <details class="faq-item reveal reveal-delay-3">
             <summary>为什么自动探测不是固定轮询？</summary>
-            <p>1.0 正式版已经改成在时间窗口内随机探测额度，目的就是避免长时间运行时形成固定节奏，降低被风控盯上的概率。</p>
+            <p>1.0.1 热修版继续沿用时间窗口内随机探测额度，目的就是避免长时间运行时形成固定节奏，降低被风控盯上的概率。</p>
           </details>
           <details class="faq-item reveal reveal-delay-3">
             <summary>第一次打开没看到 profile，最先检查什么？</summary>
@@ -541,7 +552,7 @@ app.innerHTML = `
       <section class="cta-section reveal" id="cta">
         <div class="cta-card">
           <p class="eyebrow">READY TO SHIP</p>
-          <h2>1.0 正式版已经具备可直接分发的原生交付链路。</h2>
+          <h2>1.0.1 热修版已经具备可直接分发的原生交付链路。</h2>
           <p>
             如果你要把它发给别人，优先发送完整交付包；如果你只是自己安装，直接下载 DMG 即可。需要校验文件完整性时，再配合 SHA256 清单一起发。
           </p>
