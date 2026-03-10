@@ -25,6 +25,7 @@ const changelogEntries = [
     highlights: [
       '账号切换正式收口到 daemon runtime，补齐切换耗时与同步遥测。',
       '自动策略改成时间窗口内随机探测，降低固定节奏探测带来的风控风险。',
+      '诊断中心升级成根因判断 + 修复面板，直接把影响范围和首选动作给出来。',
       '原生菜单栏支持直接切到任意已发现账号，并保留守护与诊断入口。',
       '分发链路统一为 DMG、PKG、ZIP、完整交付包和 SHA256 校验清单。'
     ]
@@ -252,7 +253,7 @@ app.innerHTML = `
           <article class="feature-card reveal reveal-delay-1">
             <span class="feature-index">04</span>
             <h3>daemon + 诊断中心</h3>
-            <p>集中查看 active profile、Codex 配置、OpenClaw 状态、daemon 巡检、watchdog 和诊断建议，减少“到底现在用了哪个账号、哪里坏了”的不确定性。</p>
+            <p>集中查看 active profile、Codex 配置、OpenClaw 状态、daemon 巡检、watchdog 和修复面板。诊断页会直接给出根因判断、影响范围和首选动作，减少“到底哪里坏了、应该先点哪个按钮”的不确定性。</p>
           </article>
           <article class="feature-card reveal reveal-delay-2">
             <span class="feature-index">05</span>
@@ -305,8 +306,8 @@ app.innerHTML = `
               <strong>随机探测窗口 + 自动切换策略</strong>
             </div>
             <div class="compare-row">
-              <span>很难交付给普通用户</span>
-              <strong>支持 <code>.app</code> / <code>.zip</code> / <code>.dmg</code> / <code>.pkg</code> / Web 兼容部署</strong>
+              <span>出问题时只剩日志和猜测</span>
+              <strong>诊断中心直接给根因、影响和修复动作</strong>
             </div>
           </div>
         </div>
@@ -525,6 +526,10 @@ app.innerHTML = `
           <details class="faq-item reveal reveal-delay-1">
             <summary>根目录到底要选目录本身，还是它的父目录？</summary>
             <p>选父目录。比如你看到了 <code>/Users/你的用户名/.openclaw</code>，那 OpenClaw 根目录应该选 <code>/Users/你的用户名</code>，而不是直接选 <code>.openclaw</code>。</p>
+          </details>
+          <details class="faq-item reveal reveal-delay-2">
+            <summary>诊断中心现在会直接告诉我该怎么修吗？</summary>
+            <p>会。1.0 现在会把网关不可达、Discord 离线、watchdog 缺失和环境风险拆成不同根因，并直接给出影响范围、首选动作，以及对应的日志入口。</p>
           </details>
           <details class="faq-item reveal reveal-delay-2">
             <summary>它适合什么样的人？</summary>
