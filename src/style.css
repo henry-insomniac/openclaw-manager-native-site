@@ -778,6 +778,23 @@ code {
   line-height: 1.76;
 }
 
+.cta-meta {
+  margin-top: 18px;
+  font-size: 0.98rem;
+}
+
+.cta-meta a {
+  font-weight: 700;
+  color: rgba(16, 17, 19, 0.88);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+
+.cta-meta a:hover {
+  color: var(--ink);
+}
+
 .reveal {
   opacity: 1;
   transform: none;

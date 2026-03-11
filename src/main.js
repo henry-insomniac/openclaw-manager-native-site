@@ -15,6 +15,7 @@ const releaseRepo = 'openclaw-manager-native';
 const releaseTag = 'v1.0.5';
 const releaseVersionLabel = '1.0.5';
 const releaseBuildLabel = '2026-03-11';
+const repoPage = `https://github.com/${releaseOwner}/${releaseRepo}`;
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/latest/download`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
 
@@ -318,6 +319,7 @@ app.innerHTML = `
         <a href="#downloads">下载</a>
         <a href="#changelog">更新</a>
         <a href="#faq">FAQ</a>
+        <a href="${repoPage}" target="_blank" rel="noreferrer">GitHub</a>
       </nav>
       <a class="nav-cta" href="#downloads">下载 ${releaseVersionLabel}</a>
     </header>
@@ -508,6 +510,9 @@ app.innerHTML = `
             <a class="button button-primary" href="${downloads.dmg}" target="_blank" rel="noreferrer">下载 DMG</a>
             <a class="button button-secondary" href="${downloads.delivery}" target="_blank" rel="noreferrer">完整交付包</a>
           </div>
+          <p class="cta-meta">
+            仓库地址：<a href="${repoPage}" target="_blank" rel="noreferrer">${repoPage}</a>。如果这个项目对你有用，欢迎点个 Star。
+          </p>
         </div>
       </section>
     </main>
