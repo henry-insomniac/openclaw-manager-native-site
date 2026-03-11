@@ -12,8 +12,8 @@ const brandMark = `
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseTag = 'v1.0.4';
-const releaseVersionLabel = '1.0.4';
+const releaseTag = 'v1.0.5';
+const releaseVersionLabel = '1.0.5';
 const releaseBuildLabel = '2026-03-11';
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/latest/download`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
@@ -28,16 +28,16 @@ const downloads = {
 
 const releaseHighlights = [
   {
-    title: '诊断先给动作',
-    text: '诊断页先告诉你先做哪一步，再保留最近一次操作结果。'
+    title: '空闲后台更轻',
+    text: '自动刷新改走轻路径，安装版空闲时 UI 和 daemon 都能回到 0.0% CPU。'
   },
   {
-    title: '安装版更稳',
-    text: '原生壳的 reopen、菜单栏和弹窗路径继续收口。'
+    title: '诊断常驻更快',
+    text: 'support 摘要加入短期缓存，普通轮询不再反复重跑整套深检查。'
   },
   {
-    title: '刷新更快',
-    text: 'manager 和 support 刷新已经明显快于上一版。'
+    title: '安装版启动更稳',
+    text: '修掉清理历史 backend 时的启动死锁，旧的 bundled 后台也会在启动时一起收干净。'
   }
 ];
 
@@ -149,6 +149,17 @@ const faqEntries = [
 ];
 
 const changelogEntries = [
+  {
+    version: 'v1.0.5',
+    date: '2026-03-11',
+    title: '1.0.5 诊断快路径 + 启动链修复',
+    summary: '自动诊断轮询改走缓存快路径，安装版清历史 backend 的启动死锁被修掉，空闲后台占用继续压低。',
+    highlights: [
+      '自动刷新只拉 manager 或命中 support 缓存，手动刷新才强制跑 fresh 深检查。',
+      '启动时会清掉旧的 bundled daemon / Node API 残留，并新增 lifecycle 日志帮助定位安装版问题。',
+      '安装版实测：空闲 35 秒后 UI 与 daemon 均为 0.0% CPU；support 缓存命中约 0.005s。'
+    ]
+  },
   {
     version: 'v1.0.4',
     date: '2026-03-11',
@@ -371,7 +382,7 @@ app.innerHTML = `
                 <article class="terminal-card">
                   <code>[daemon] profile scan complete provider=openclaw</code>
                   <code>[support] action=doctor-fix summary=ready</code>
-                  <code>[release] latest=v1.0.4 dmg pkg delivery checksums</code>
+                  <code>[release] latest=v1.0.5 dmg pkg delivery checksums</code>
                 </article>
               </div>
             </div>
