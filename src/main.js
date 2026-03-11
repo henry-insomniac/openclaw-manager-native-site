@@ -4,20 +4,31 @@ const app = document.querySelector('#app');
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseTag = 'v1.0.1';
-const releaseVersionLabel = '1.0.1 热修版';
-const releaseBuildLabel = '2026-03-10 Hotfix';
-const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
+const releaseTag = 'v1.0.3';
+const releaseVersionLabel = '1.0.3';
+const releaseBuildLabel = '2026-03-11';
+const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/latest/download`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
 const downloads = {
-  dmg: `${releaseBase}/OpenClaw.Manager.Native-1.0.1-arm64.dmg`,
-  pkg: `${releaseBase}/OpenClaw.Manager.Native-1.0.1-arm64.pkg`,
-  zip: `${releaseBase}/OpenClaw.Manager.Native-1.0.1-arm64-mac.zip`,
+  dmg: `${releaseBase}/OpenClawManagerNative-latest-arm64.dmg`,
+  pkg: `${releaseBase}/OpenClawManagerNative-latest-arm64.pkg`,
+  zip: `${releaseBase}/OpenClawManagerNative-latest-arm64.zip`,
   delivery: `${releaseBase}/OpenClawManagerNative-latest-delivery.zip`,
-  checksums: `${releaseBase}/OpenClawManagerNative-1.0.1-SHA256SUMS.txt`,
+  checksums: `${releaseBase}/OpenClawManagerNative-latest-SHA256SUMS.txt`,
 };
 
 const changelogEntries = [
+  {
+    version: 'v1.0.3',
+    date: '2026-03-11',
+    title: '1.0.3 文案收紧 + provider-aware 第一阶段',
+    summary: '把原生 app 里那批像官网落地页的文案压成直接动作，同时开始把 profile 判断和激活逻辑从 Codex 写死切到 provider-aware 的第一阶段。',
+    highlights: [
+      '首页、诊断页和命令页的文案全部收短，界面只保留状态、动作和必要说明。',
+      'daemon 现在会读取 openclaw.json，识别 primary provider / primary model，非 Codex profile 不再因为没有 .codex 凭据直接判死。',
+      '默认激活同步扩展到整个 OpenClaw auth/config，1.0.3 同步重新打出 DMG、PKG、ZIP、完整交付包和 SHA256。'
+    ]
+  },
   {
     version: 'v1.0.1',
     date: '2026-03-10',
@@ -135,7 +146,7 @@ app.innerHTML = `
             OpenClaw Manager Native 面向 macOS，专门解决多 profile、目录分散、手动切换、固定探测、登录回调和本地运行环境维护这些日常问题。它本地运行、不依赖 Docker、不要求额外安装 Node，同时保留 Web 兼容部署能力。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#downloads">下载 1.0</a>
+            <a class="button button-primary" href="#downloads">下载 1.0.3</a>
             <a class="button button-ghost" href="#workflow">查看工作方式</a>
           </div>
           <ul class="hero-points">
@@ -201,27 +212,27 @@ app.innerHTML = `
       <section class="alpha-banner reveal" aria-label="正式版提示">
         <div class="alpha-banner-copy">
           <p class="eyebrow">RELEASE NOTE</p>
-          <h2>这是 1.0.1 热修版，核心能力已经收口到可直接分发的原生桌面应用。</h2>
+          <h2>这是 1.0.3，先把原生壳文案收紧，再把 OpenClaw profile 管理从 Codex 写死里拆出来。</h2>
           <p>
-            如果你准备把链接发给别人，建议一并转发完整交付包与校验清单。当前仍以 Apple Silicon / arm64 为正式支持目标；如果你分发的是未公证包，第一次打开可能仍需要到 <code>系统设置 -> 隐私与安全性</code> 里手动允许一次。
+            如果你准备把链接发给别人，建议一并转发完整交付包与校验清单。当前正式支持仍以 Apple Silicon / arm64 为主；如果你分发的是未公证包，第一次打开可能仍需要到 <code>系统设置 -> 隐私与安全性</code> 里手动允许一次。
           </p>
         </div>
         <div class="alpha-banner-points">
           <article>
-            <strong>随机探测</strong>
-            <span>自动策略不再固定轮询，而是在时间窗口内随机探测额度，更适合长期稳定运行。</span>
+            <strong>文案收紧</strong>
+            <span>原生 app 里的说明改成直接状态和动作，不再像官网文案塞进桌面应用里。</span>
           </article>
           <article>
-            <strong>推荐 DMG</strong>
+            <strong>开始兼容非 Codex provider</strong>
+            <span>profile 判断和激活同步开始读取 OpenClaw 自己的 provider 配置，不再默认所有人都走 Codex。</span>
+          </article>
+          <article>
+            <strong>继续推荐 DMG</strong>
             <span>第一次安装优先使用 DMG；如果你要发给偏安装器习惯的用户，再给 PKG。</span>
           </article>
           <article>
             <strong>附带校验</strong>
-            <span>完整交付包现在包含 <code>QUICKSTART.md</code>、<code>USAGE.md</code> 和 <code>SHA256</code> 校验清单。</span>
-          </article>
-          <article>
-            <strong>Web 兼容</strong>
-            <span>同一套 daemon 状态模型已兼容 Web 部署，原生壳优先解决本地速度和稳定性。</span>
+            <span>完整交付包继续包含 <code>QUICKSTART.md</code>、<code>USAGE.md</code> 和 <code>SHA256</code> 校验清单。</span>
           </article>
           <div class="alpha-banner-actions">
             <a class="button button-primary" href="#downloads">先下 DMG</a>
@@ -270,7 +281,7 @@ app.innerHTML = `
           <article class="feature-card reveal reveal-delay-2">
             <span class="feature-index">05</span>
             <h3>内置运行时</h3>
-            <p>应用自带需要的 Node 运行时与本地 manager 逻辑。对最终用户来说，不需要 Docker，也不要求另外装 Node。</p>
+            <p>应用自带本地 runtime 与 manager 逻辑。对最终用户来说，不需要 Docker，也不要求另外装额外运行环境。</p>
           </article>
           <article class="feature-card reveal reveal-delay-3">
             <span class="feature-index">06</span>
