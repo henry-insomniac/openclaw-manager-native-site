@@ -140,10 +140,10 @@ app.innerHTML = `
     <main>
       <section class="hero" id="hero">
         <div class="hero-copy reveal reveal-delay-1">
-          <p class="eyebrow">OPENCLAW / CODEX WORKFLOW</p>
-          <h1>把 \`.openclaw\` / \`codex\` 的账号切换、daemon 守护、诊断中心和分发链路，收进一个真正可交付的 mac 原生工作台。</h1>
+          <p class="eyebrow">OPENCLAW PROFILE MANAGER</p>
+          <h1>把 OpenClaw profile 的切换、daemon 守护、诊断中心和分发链路，收进一个真正可交付的 mac 原生工具。</h1>
           <p class="hero-text">
-            OpenClaw Manager Native 面向 macOS，专门解决多 profile、目录分散、手动切换、固定探测、登录回调和本地运行环境维护这些日常问题。它本地运行、不依赖 Docker、不要求额外安装 Node，同时保留 Web 兼容部署能力。
+            OpenClaw Manager Native 面向 macOS，专门解决多 profile、目录分散、手动切换、固定探测和本地运行环境维护这些问题。1.0.3 开始把重心从 Codex-only 管理器收口到 OpenClaw profile manager，Codex 继续作为可选 companion runtime 保留。
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#downloads">下载 1.0.3</a>
@@ -151,8 +151,9 @@ app.innerHTML = `
           </div>
           <ul class="hero-points">
             <li>macOS 原生桌面应用</li>
-            <li>快速稳定切换 \`.openclaw\` / \`codex\` 账号</li>
-            <li>daemon、诊断中心、可视化设置与 Web 兼容部署</li>
+            <li>以 OpenClaw profile 管理为中心</li>
+            <li>非 Codex provider 的第一阶段兼容已经落地</li>
+            <li>daemon、诊断中心、可视化设置与可选 Codex companion</li>
           </ul>
         </div>
 
@@ -166,7 +167,7 @@ app.innerHTML = `
               <div class="panel panel-signal">
                 <span class="panel-label">ACTIVE PROFILE</span>
                 <strong>acct-b</strong>
-                <small>Codex 与 OpenClaw 已同步</small>
+                <small>OpenClaw 默认槽位已同步</small>
               </div>
               <div class="stat-grid">
                 <article class="mini-stat">
@@ -177,7 +178,7 @@ app.innerHTML = `
                 <article class="mini-stat">
                   <span>目录切换</span>
                   <strong data-count="2">0</strong>
-                  <small>OpenClaw / Codex</small>
+                  <small>OpenClaw / 可选 Codex</small>
                 </article>
                 <article class="mini-stat">
                   <span>核心原则</span>
@@ -339,7 +340,7 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <p class="eyebrow">DOWNLOADS</p>
-          <h2>正式版提供 5 个分发入口，第一次安装优先从 DMG 开始。</h2>
+          <h2>1.0.3 提供 4 个分发入口，第一次安装优先从 DMG 开始。</h2>
         </div>
         <div class="download-grid">
           <article class="download-card reveal reveal-delay-1">
@@ -539,8 +540,8 @@ app.innerHTML = `
             <p>不需要。原生版内置了 app 运行需要的本地 runtime，面向最终用户的交付方式是 <code>.app</code>、<code>.zip</code>、<code>.dmg</code> 和 <code>.pkg</code>。</p>
           </details>
           <details class="faq-item reveal reveal-delay-3">
-            <summary>为什么自动探测不是固定轮询？</summary>
-            <p>1.0.1 热修版继续沿用时间窗口内随机探测额度，目的就是避免长时间运行时形成固定节奏，降低被风控盯上的概率。</p>
+            <summary>现在只能管理 Codex 吗？</summary>
+            <p>不是。1.0.3 已开始按 OpenClaw 的 provider / model 识别 profile，非 Codex provider 可以被发现、展示和激活；Codex 同步仍作为第一个 companion runtime 保留。</p>
           </details>
           <details class="faq-item reveal reveal-delay-3">
             <summary>第一次打开没看到 profile，最先检查什么？</summary>
@@ -564,7 +565,7 @@ app.innerHTML = `
       <section class="cta-section reveal" id="cta">
         <div class="cta-card">
           <p class="eyebrow">READY TO SHIP</p>
-          <h2>1.0.1 热修版已经具备可直接分发的原生交付链路。</h2>
+          <h2>1.0.3 已经把原生交付链路和多 provider 起步版本一起准备好了。</h2>
           <p>
             如果你要把它发给别人，优先发送完整交付包；如果你只是自己安装，直接下载 DMG 即可。需要校验文件完整性时，再配合 SHA256 清单一起发。
           </p>
