@@ -4,8 +4,8 @@ const app = document.querySelector('#app');
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseTag = 'v1.0.3';
-const releaseVersionLabel = '1.0.3';
+const releaseTag = 'v1.0.4';
+const releaseVersionLabel = '1.0.4';
 const releaseBuildLabel = '2026-03-11';
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/latest/download`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
@@ -18,6 +18,17 @@ const downloads = {
 };
 
 const changelogEntries = [
+  {
+    version: 'v1.0.4',
+    date: '2026-03-11',
+    title: '1.0.4 诊断中心稳定性 + 性能收口',
+    summary: '把诊断中心继续收成更直接的本地维护界面，修掉原生壳 reopen 风险，并把 manager / support 刷新速度压下来。',
+    highlights: [
+      'reopen、菜单栏和弹窗路径改成明确主线程调用，原生壳不再靠危险的 UI 隔离写法硬撑。',
+      '诊断页新增“先做这一步 / 最近一次操作 / 维护建议”，官方体检和修复结果改成中文摘要。',
+      '安装版实测：manager 约 8.9s 降到 0.5s，support/summary 约 12.0s 降到 3.5s。'
+    ]
+  },
   {
     version: 'v1.0.3',
     date: '2026-03-11',
@@ -127,11 +138,8 @@ app.innerHTML = `
       </a>
       <nav class="nav-links">
         <a href="#capabilities">能力</a>
-        <a href="#workflow">流程</a>
         <a href="#downloads">下载</a>
         <a href="#changelog">更新</a>
-        <a href="#usage">使用</a>
-        <a href="#security">本地性</a>
         <a href="#faq">FAQ</a>
       </nav>
       <a class="nav-cta" href="#downloads">立即下载</a>
@@ -141,19 +149,19 @@ app.innerHTML = `
       <section class="hero" id="hero">
         <div class="hero-copy reveal reveal-delay-1">
           <p class="eyebrow">OPENCLAW PROFILE MANAGER</p>
-          <h1>把 OpenClaw profile 的切换、daemon 守护、诊断中心和分发链路，收进一个真正可交付的 mac 原生工具。</h1>
+          <h1>在 Mac 上直接管理 OpenClaw profile、诊断和修复。</h1>
           <p class="hero-text">
-            OpenClaw Manager Native 面向 macOS，专门解决多 profile、目录分散、手动切换、固定探测和本地运行环境维护这些问题。1.0.3 开始把重心从 Codex-only 管理器收口到 OpenClaw profile manager，Codex 继续作为可选 companion runtime 保留。
+            这是一个本地原生工具。它负责 profile 管理、切换、诊断、守护和可选 Codex companion；配置和状态都留在你自己的机器上。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#downloads">下载 1.0.3</a>
+            <a class="button button-primary" href="#downloads">下载 1.0.4</a>
             <a class="button button-ghost" href="#workflow">查看工作方式</a>
           </div>
           <ul class="hero-points">
             <li>macOS 原生桌面应用</li>
             <li>以 OpenClaw profile 管理为中心</li>
-            <li>非 Codex provider 的第一阶段兼容已经落地</li>
-            <li>daemon、诊断中心、可视化设置与可选 Codex companion</li>
+            <li>诊断中心可以直接维护本地 OpenClaw</li>
+            <li>Codex 仍保留为可选 companion</li>
           </ul>
         </div>
 
@@ -213,27 +221,27 @@ app.innerHTML = `
       <section class="alpha-banner reveal" aria-label="正式版提示">
         <div class="alpha-banner-copy">
           <p class="eyebrow">RELEASE NOTE</p>
-          <h2>这是 1.0.3，先把原生壳文案收紧，再把 OpenClaw profile 管理从 Codex 写死里拆出来。</h2>
+          <h2>这是 1.0.4。重点是诊断中心更稳、更直接，安装版刷新也明显更快了。</h2>
           <p>
-            如果你准备把链接发给别人，建议一并转发完整交付包与校验清单。当前正式支持仍以 Apple Silicon / arm64 为主；如果你分发的是未公证包，第一次打开可能仍需要到 <code>系统设置 -> 隐私与安全性</code> 里手动允许一次。
+            如果你要发给别人，优先转发完整交付包。当前正式支持仍以 Apple Silicon / arm64 为主；未公证包第一次打开时，可能仍需要到 <code>系统设置 -> 隐私与安全性</code> 里手动允许一次。
           </p>
         </div>
         <div class="alpha-banner-points">
           <article>
-            <strong>文案收紧</strong>
-            <span>原生 app 里的说明改成直接状态和动作，不再像官网文案塞进桌面应用里。</span>
+            <strong>诊断更直接</strong>
+            <span>现在会先给你“先做这一步”，再保留最近一次操作结果。</span>
           </article>
           <article>
-            <strong>开始兼容非 Codex provider</strong>
-            <span>profile 判断和激活同步开始读取 OpenClaw 自己的 provider 配置，不再默认所有人都走 Codex。</span>
+            <strong>原生壳更稳</strong>
+            <span>reopen、菜单栏和弹窗路径继续收口，减少桌面端崩溃风险。</span>
           </article>
           <article>
-            <strong>继续推荐 DMG</strong>
-            <span>第一次安装优先使用 DMG；如果你要发给偏安装器习惯的用户，再给 PKG。</span>
+            <strong>刷新更快</strong>
+            <span>安装版 manager 和 support 的刷新都比上一版明显更快。</span>
           </article>
           <article>
             <strong>附带校验</strong>
-            <span>完整交付包继续包含 <code>QUICKSTART.md</code>、<code>USAGE.md</code> 和 <code>SHA256</code> 校验清单。</span>
+            <span>完整交付包继续带 <code>QUICKSTART.md</code>、<code>USAGE.md</code> 和 <code>SHA256</code>。</span>
           </article>
           <div class="alpha-banner-actions">
             <a class="button button-primary" href="#downloads">先下 DMG</a>
@@ -245,24 +253,24 @@ app.innerHTML = `
       <section class="trust-strip reveal">
         <div>
           <strong>为本地工作流而设计</strong>
-          <span>不是远程账号池，不是共享服务面板，而是你自己机器上的原生控制台。</span>
+          <span>不是在线后台，就是你自己机器上的原生控制台。</span>
         </div>
         <div>
           <strong>适合对象</strong>
-          <span>需要频繁维护 OpenClaw / Codex 本地环境的开发者、团队内部工具作者和高频使用者。</span>
+          <span>适合需要频繁维护 OpenClaw 本地环境的人。</span>
         </div>
       </section>
 
       <section class="section capabilities" id="capabilities">
         <div class="section-heading reveal">
           <p class="eyebrow">CAPABILITIES</p>
-          <h2>官网不是在讲概念，而是在解释它具体替你省掉什么。</h2>
+          <h2>它主要替你省掉这几类麻烦。</h2>
         </div>
         <div class="card-grid">
           <article class="feature-card reveal reveal-delay-1">
             <span class="feature-index">01</span>
             <h3>快速账号切换</h3>
-            <p>把 <code>.openclaw</code>、<code>.openclaw-*</code>、<code>.codex</code>、<code>.codex-*</code> 从散乱目录里整理成一个统一入口，减少手工切目录、手工切账号和覆盖配置的成本。</p>
+            <p>把 <code>.openclaw</code>、<code>.openclaw-*</code>、<code>.codex</code>、<code>.codex-*</code> 整理成一个统一入口。</p>
           </article>
           <article class="feature-card reveal reveal-delay-2">
             <span class="feature-index">02</span>
@@ -272,12 +280,12 @@ app.innerHTML = `
           <article class="feature-card reveal reveal-delay-3">
             <span class="feature-index">03</span>
             <h3>随机探测策略</h3>
-            <p>自动切换不再依赖固定轮询，而是在时间区间内随机探测额度，再结合状态阈值决定是否迁移账号，降低固定节奏带来的风险。</p>
+            <p>自动切换不再走固定轮询，而是在时间窗口内随机探测。</p>
           </article>
           <article class="feature-card reveal reveal-delay-1">
             <span class="feature-index">04</span>
             <h3>daemon + 诊断中心</h3>
-            <p>集中查看 active profile、Codex 配置、OpenClaw 状态、daemon 巡检、watchdog 和修复面板。诊断页会直接给出根因判断、影响范围和首选动作，减少“到底哪里坏了、应该先点哪个按钮”的不确定性。</p>
+            <p>集中看状态、看根因、点修复。诊断页会直接给建议动作。</p>
           </article>
           <article class="feature-card reveal reveal-delay-2">
             <span class="feature-index">05</span>
@@ -287,7 +295,7 @@ app.innerHTML = `
           <article class="feature-card reveal reveal-delay-3">
             <span class="feature-index">06</span>
             <h3>面向交付</h3>
-            <p>支持 <code>.app</code>、<code>.zip</code>、<code>.dmg</code>、<code>.pkg</code> 分发链路，并保留 Web 兼容部署入口，适合内部快速发给别人使用。</p>
+            <p>支持 <code>.app</code>、<code>.zip</code>、<code>.dmg</code>、<code>.pkg</code>，方便直接发给别人。</p>
           </article>
         </div>
       </section>
@@ -296,7 +304,7 @@ app.innerHTML = `
         <div class="workflow-layout">
           <div class="workflow-copy reveal">
             <p class="eyebrow">WORKFLOW</p>
-            <h2>从“手工改目录 + 手工跑命令”变成一个能解释自身状态的原生工具。</h2>
+            <h2>三步上手。</h2>
             <ol class="timeline">
               <li>
                 <strong>安装 app</strong>
@@ -308,7 +316,7 @@ app.innerHTML = `
               </li>
               <li>
                 <strong>查看并切换 profile</strong>
-                <span>在同一界面里管理 active profile、状态、同步关系和本地运行结果。</span>
+                <span>在同一界面里看状态、切换和修复。</span>
               </li>
             </ol>
           </div>
@@ -340,13 +348,13 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <p class="eyebrow">DOWNLOADS</p>
-          <h2>1.0.3 提供 4 个分发入口，第一次安装优先从 DMG 开始。</h2>
+          <h2>先下 DMG；需要安装器再下 PKG。</h2>
         </div>
         <div class="download-grid">
           <article class="download-card reveal reveal-delay-1">
             <span class="feature-index">RECOMMENDED</span>
             <h3>DMG 安装包</h3>
-            <p>最适合第一次测试。打开镜像后，把 <code>OpenClaw Manager Native.app</code> 拖到 <code>Applications</code> 即可。</p>
+            <p>第一次安装优先用这个。打开后把 app 拖到 <code>Applications</code>。</p>
             <ul class="download-list">
               <li>适合第一次安装</li>
               <li>当前为 Apple Silicon / arm64</li>
@@ -359,7 +367,7 @@ app.innerHTML = `
           <article class="download-card reveal reveal-delay-2">
             <span class="feature-index">INSTALLER</span>
             <h3>PKG 安装包</h3>
-            <p>适合习惯安装器流程的使用者。安装后会把应用放到标准位置，更适合直接分发给团队成员。</p>
+            <p>适合习惯安装器流程的人。</p>
             <ul class="download-list">
               <li>更接近传统 macOS 安装流程</li>
               <li>适合引导式安装</li>
@@ -372,7 +380,7 @@ app.innerHTML = `
           <article class="download-card reveal reveal-delay-3">
             <span class="feature-index">DIRECT APP ZIP</span>
             <h3>ZIP 安装包</h3>
-            <p>适合已经熟悉 macOS 应用分发方式的人。解压后把 app 拖进 <code>Applications</code> 即可。</p>
+            <p>解压后把 app 拖进 <code>Applications</code>。</p>
             <ul class="download-list">
               <li>适合熟悉 Mac 的用户</li>
               <li>适合内部直发 app</li>
@@ -385,7 +393,7 @@ app.innerHTML = `
           <article class="download-card reveal reveal-delay-1">
             <span class="feature-index">FULL BUNDLE</span>
             <h3>完整交付包</h3>
-            <p>除了安装包，还额外包含 <code>INSTALL.md</code>、<code>QUICKSTART.md</code>、<code>USAGE.md</code> 和校验清单，适合你直接发给别人。</p>
+            <p>除了安装包，还带说明和校验文件，适合直接转发。</p>
             <ul class="download-list">
               <li>适合直接转发给使用者</li>
               <li>包含安装和排障说明</li>
@@ -398,7 +406,7 @@ app.innerHTML = `
         </div>
         <div class="download-note reveal">
           <p><strong>当前版本：</strong> ${releaseVersionLabel} · ${releaseBuildLabel}</p>
-          <p><strong>已知边界：</strong> 当前正式支持 Apple Silicon / arm64；如果你下载的是未公证包，第一次打开时可能需要在 <code>系统设置 -> 隐私与安全性</code> 中手动允许。</p>
+          <p><strong>已知边界：</strong> 当前正式支持 Apple Silicon / arm64；未公证包第一次打开时，可能需要在 <code>系统设置 -> 隐私与安全性</code> 中手动允许。</p>
           <div class="download-actions">
             <a class="button button-ghost" href="${downloads.checksums}" target="_blank" rel="noreferrer">SHA256 校验</a>
             <a class="button button-ghost" href="${releasePage}" target="_blank" rel="noreferrer">查看 GitHub Release</a>
@@ -409,7 +417,7 @@ app.innerHTML = `
       <section class="section changelog-section" id="changelog">
         <div class="section-heading reveal">
           <p class="eyebrow">CHANGELOG</p>
-          <h2>每个版本做了什么，可以直接在这里按时间线查看。</h2>
+          <h2>版本变化。</h2>
         </div>
         <div class="changelog-layout">
           <div class="changelog-rail reveal reveal-delay-1">
@@ -430,29 +438,29 @@ app.innerHTML = `
       <section class="section usage-section" id="usage">
         <div class="section-heading reveal">
           <p class="eyebrow">USAGE GUIDE</p>
-          <h2>如果这是你第一次使用，按下面顺序做，基本不会走偏。</h2>
+          <h2>第一次使用，按这几步。</h2>
         </div>
         <div class="usage-layout">
           <div class="usage-steps">
             <article class="usage-step reveal reveal-delay-1">
               <span class="feature-index">STEP 01</span>
               <h3>先把 app 安装到 Applications</h3>
-              <p>推荐优先使用 <code>.dmg</code>。打开镜像后，把 <code>OpenClaw Manager Native.app</code> 拖到 <code>Applications</code>。如果你拿到的是 <code>.zip</code>，先解压，再拖进去。</p>
+              <p>推荐优先使用 <code>.dmg</code>。如果你拿到的是 <code>.zip</code>，先解压，再拖进去。</p>
             </article>
             <article class="usage-step reveal reveal-delay-2">
               <span class="feature-index">STEP 02</span>
               <h3>第一次打开如果被拦截，先在系统里允许</h3>
-              <p>如果 macOS 提示应用无法直接打开，到 <code>系统设置 -> 隐私与安全性</code> 里允许，然后回到 <code>Applications</code> 重新启动。这个动作通常只需要第一次做。</p>
+              <p>如果 macOS 拦截，到 <code>系统设置 -> 隐私与安全性</code> 里允许一次，然后再打开。</p>
             </article>
             <article class="usage-step reveal reveal-delay-3">
               <span class="feature-index">STEP 03</span>
               <h3>先看主界面有没有直接显示 profile</h3>
-              <p>如果你的 <code>.openclaw</code> 和 <code>.codex</code> 本来就在默认 Home 根目录下，软件可能已经能直接识别。你先看界面里有没有 profile 卡片、active profile 和状态信息。</p>
+              <p>如果默认目录就对，软件可能已经能直接识别。</p>
             </article>
             <article class="usage-step reveal reveal-delay-1">
               <span class="feature-index">STEP 04</span>
               <h3>如果没显示正确内容，再去设置根目录</h3>
-              <p>最常见的问题不是软件坏了，而是 OpenClaw / Codex 根目录没有指到正确的父目录。根目录应该选“包含这些隐藏目录的那一层”，而不是直接选目录本身。</p>
+              <p>最常见的问题是根目录选错了。要选父目录，不要直接选隐藏目录本身。</p>
               <div class="usage-command">
                 <code>配置 -> 选择 OpenClaw 根目录...</code>
                 <code>配置 -> 选择 Codex 根目录...</code>
@@ -461,7 +469,7 @@ app.innerHTML = `
             <article class="usage-step reveal reveal-delay-2">
               <span class="feature-index">STEP 05</span>
               <h3>改完目录后，执行一次重启</h3>
-              <p>每次你修改完根目录，都执行一次重启，让本地 manager 重新扫描并加载最新状态。否则界面可能还停留在旧结果。</p>
+              <p>改完目录后执行一次重启，让本地 manager 重新扫描。</p>
               <div class="usage-command">
                 <code>配置 -> 重启服务并刷新窗口</code>
               </div>
@@ -469,7 +477,7 @@ app.innerHTML = `
             <article class="usage-step reveal reveal-delay-3">
               <span class="feature-index">STEP 06</span>
               <h3>看到 profile 和状态，就说明第一次配置成功了</h3>
-              <p>第一次配置成功最明显的标志，就是主界面开始出现 profile 卡片、active profile、OpenClaw 状态和 Codex 对应信息。之后日常基本都在主界面完成。</p>
+              <p>之后日常操作基本都在主界面完成。</p>
             </article>
           </div>
 
@@ -498,7 +506,7 @@ app.innerHTML = `
             </div>
             <div class="usage-note usage-note-accent">
               <p class="usage-title">如果你完全不确定目录在哪</p>
-              <p>先从你的用户目录开始看，也就是 <code>/Users/你的用户名</code>。如果之前一直在默认方式下使用 OpenClaw / Codex，大多数情况下根目录就是这里。</p>
+              <p>先从你的用户目录开始看，也就是 <code>/Users/你的用户名</code>。默认情况下，根目录大多就在这里。</p>
             </div>
           </aside>
         </div>
@@ -507,20 +515,20 @@ app.innerHTML = `
       <section class="section security-section" id="security">
         <div class="section-heading reveal">
           <p class="eyebrow">LOCAL FIRST</p>
-          <h2>真正重要的不是“界面好看”，而是这款工具从一开始就按本地自托管的思路设计。</h2>
+          <h2>本地跑，不上云。</h2>
         </div>
         <div class="security-grid">
           <article class="security-card reveal reveal-delay-1">
             <h3>配置留在本机</h3>
-            <p>目录扫描、状态管理、runtime 和配置文件都在用户自己的 Mac 上完成，不引入中心化服务器。</p>
+            <p>目录扫描、状态管理和配置文件都在你自己的 Mac 上完成。</p>
           </article>
           <article class="security-card reveal reveal-delay-2">
             <h3>更适合敏感工作流</h3>
-            <p>如果你本来就不希望把本地环境细节交给第三方后台，这种本地管理台比在线服务更可控。</p>
+            <p>如果你不想把本地环境细节交给第三方后台，这种方式更可控。</p>
           </article>
           <article class="security-card reveal reveal-delay-3">
             <h3>便于后续正式化</h3>
-            <p>现在已经有签名、DMG、PKG、ZIP、完整交付包和校验清单，正式分发链路已经成型，后续可以继续叠加公证与多架构支持。</p>
+            <p>现在已经有 DMG、PKG、ZIP、完整交付包和校验清单。</p>
           </article>
         </div>
       </section>
@@ -541,7 +549,7 @@ app.innerHTML = `
           </details>
           <details class="faq-item reveal reveal-delay-3">
             <summary>现在只能管理 Codex 吗？</summary>
-            <p>不是。1.0.3 已开始按 OpenClaw 的 provider / model 识别 profile，非 Codex provider 可以被发现、展示和激活；Codex 同步仍作为第一个 companion runtime 保留。</p>
+            <p>不是。现在已经开始按 OpenClaw 的 provider / model 识别 profile；Codex 继续作为第一个 companion runtime 保留。</p>
           </details>
           <details class="faq-item reveal reveal-delay-3">
             <summary>第一次打开没看到 profile，最先检查什么？</summary>
@@ -553,7 +561,7 @@ app.innerHTML = `
           </details>
           <details class="faq-item reveal reveal-delay-2">
             <summary>诊断中心现在会直接告诉我该怎么修吗？</summary>
-            <p>会。1.0 现在会把网关不可达、Discord 离线、watchdog 缺失和环境风险拆成不同根因，并直接给出影响范围、首选动作，以及对应的日志入口。</p>
+            <p>会。现在会先给建议动作，再保留最近一次操作结果和必要日志入口。</p>
           </details>
           <details class="faq-item reveal reveal-delay-2">
             <summary>它适合什么样的人？</summary>
@@ -565,9 +573,9 @@ app.innerHTML = `
       <section class="cta-section reveal" id="cta">
         <div class="cta-card">
           <p class="eyebrow">READY TO SHIP</p>
-          <h2>1.0.3 已经把原生交付链路和多 provider 起步版本一起准备好了。</h2>
+          <h2>1.0.4 已可下载。</h2>
           <p>
-            如果你要把它发给别人，优先发送完整交付包；如果你只是自己安装，直接下载 DMG 即可。需要校验文件完整性时，再配合 SHA256 清单一起发。
+            如果你要发给别人，优先发完整交付包；如果只是自己安装，直接下载 DMG 即可。
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="${downloads.dmg}" target="_blank" rel="noreferrer">下载 DMG</a>
