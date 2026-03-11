@@ -239,6 +239,45 @@ code {
   max-width: 11ch;
 }
 
+.hero-callout {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0 24px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: var(--shadow-md);
+}
+
+.hero-callout-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-callout p {
+  margin: 0;
+  color: var(--text-1);
+  line-height: 1.6;
+}
+
+.hero-callout a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+
 .hero h1 span {
   display: block;
 }
@@ -831,6 +870,11 @@ code {
 
   .hero {
     padding-top: 64px;
+  }
+
+  .hero-callout {
+    display: flex;
+    border-radius: 24px;
   }
 
   .hero h1 {

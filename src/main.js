@@ -328,6 +328,14 @@ app.innerHTML = `
       <section class="hero" id="hero">
         <div class="hero-copy reveal reveal-delay-1">
           <p class="eyebrow">LOCAL CONTROL SURFACE</p>
+          <div class="hero-callout">
+            <span class="hero-callout-label">GitHub</span>
+            <p>
+              仓库已开源：
+              <a href="${repoPage}" target="_blank" rel="noreferrer">${releaseOwner}/${releaseRepo}</a>
+              。如果这个项目对你有用，欢迎点个 Star。
+            </p>
+          </div>
           <h1>在 Mac 上直接管理 OpenClaw。<span>看状态，点修复。</span></h1>
           <p class="hero-text">
             这是一个本地原生工具。它负责 profile 管理、切换、诊断、守护和可选 Codex companion；配置和状态都留在你自己的机器上。
