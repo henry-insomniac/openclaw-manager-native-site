@@ -154,11 +154,11 @@ const changelogEntries = [
     version: 'v1.0.5',
     date: '2026-03-11',
     title: '1.0.5 诊断快路径 + 启动链修复',
-    summary: '自动诊断轮询改走缓存快路径，安装版清历史 backend 的启动死锁被修掉，空闲后台占用继续压低。',
+    summary: '1.0.5 继续对 1.0.4 做性能收口：普通页面不再全量刷新，support 走缓存快路径，启动前还会清理历史 backend 残留。',
     highlights: [
-      '自动刷新只拉 manager 或命中 support 缓存，手动刷新才强制跑 fresh 深检查。',
-      '启动时会清掉旧的 bundled daemon / Node API 残留，并新增 lifecycle 日志帮助定位安装版问题。',
-      '安装版实测：空闲 35 秒后 UI 与 daemon 均为 0.0% CPU；support 缓存命中约 0.005s。'
+      '去掉菜单栏 20 秒全量轮询和启动时的重复全量刷新，普通页面只拉 manager，诊断页才拉完整 support。',
+      'support summary 增加 10s / 45s / 2min 分层缓存，profile 发现也增加 45 秒 state dir cache。',
+      '修掉 stale backend 清理里的 pipe 死锁，并在启动时清掉旧 daemon / legacy Node API；安装版空闲 35 秒后 UI 与 daemon 均为 0.0% CPU。'
     ]
   },
   {
