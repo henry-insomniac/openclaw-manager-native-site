@@ -317,7 +317,13 @@ app.innerHTML = `
         <a href="#faq">FAQ</a>
         <a href="${repoPage}" target="_blank" rel="noreferrer">GitHub</a>
       </nav>
-      <a class="nav-cta" href="#downloads">下载 ${releaseVersionLabel}</a>
+      <div class="topbar-tools">
+        <div class="topbar-note">
+          <span>更新先发 GitHub</span>
+          <a href="${repoPage}" target="_blank" rel="noreferrer">GitHub Star</a>
+        </div>
+        <a class="nav-cta" href="#downloads">下载 ${releaseVersionLabel}</a>
+      </div>
     </header>
 
     <main>
@@ -439,13 +445,13 @@ app.innerHTML = `
             <p>${releaseVersionLabel} · ${releaseBuildLabel}</p>
           </div>
           <div>
-            <strong>其他文件</strong>
-            <p>ZIP、SHA256 和 GitHub Release。</p>
+            <strong>先看 GitHub</strong>
+            <p>想先看源码、更新节奏和已知问题，可以先去 GitHub。安装后觉得有用，欢迎点个 Star。</p>
           </div>
           <div class="download-actions">
             <a class="button button-secondary" href="${downloads.zip}" target="_blank" rel="noreferrer">下载 ZIP</a>
             <a class="button button-secondary" href="${downloads.checksums}" target="_blank" rel="noreferrer">SHA256</a>
-            <a class="button button-secondary" href="${releasePage}" target="_blank" rel="noreferrer">GitHub Release</a>
+            <a class="button button-secondary" href="${repoPage}" target="_blank" rel="noreferrer">先看 GitHub</a>
           </div>
         </div>
       </section>
@@ -466,8 +472,13 @@ app.innerHTML = `
             <h3 data-changelog-title>${initialChangelog.title}</h3>
             <p class="changelog-summary" data-changelog-summary>${initialChangelog.summary}</p>
             <ul class="changelog-list" data-changelog-list>${initialChangelogList}</ul>
+            <div class="repo-support-note">
+              <strong>更新先发 GitHub</strong>
+              <p>版本更新、修复细节和后续计划都先发 GitHub。这个工具如果帮你省了时间，欢迎去 GitHub 点个 Star。</p>
+            </div>
             <div class="download-actions">
-              <a class="button button-secondary" href="${releasePage}" target="_blank" rel="noreferrer">GitHub Release</a>
+              <a class="button button-secondary" href="${releasePage}" target="_blank" rel="noreferrer">看 Release</a>
+              <a class="button button-star" href="${repoPage}" target="_blank" rel="noreferrer">去 GitHub Star</a>
             </div>
           </article>
         </div>
@@ -479,6 +490,15 @@ app.innerHTML = `
         </div>
         <div class="faq-list">
           ${faqMarkup}
+        </div>
+        <div class="github-strip reveal">
+          <div>
+            <strong>安装后觉得有用？</strong>
+            <p>如果这个工具帮你省了时间，欢迎去 GitHub 点个 Star。后续更新和修复记录也会先发在那里。</p>
+          </div>
+          <div class="download-actions">
+            <a class="button button-star" href="${repoPage}" target="_blank" rel="noreferrer">去 GitHub Star</a>
+          </div>
         </div>
       </section>
     </main>

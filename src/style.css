@@ -118,6 +118,12 @@ code {
   backdrop-filter: blur(12px);
 }
 
+.topbar-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -195,6 +201,31 @@ code {
 
 .nav-cta:hover {
   transform: translateY(-1px);
+}
+
+.topbar-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-2);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.topbar-note span {
+  white-space: nowrap;
+}
+
+.topbar-note a {
+  color: var(--text-1);
+  font-weight: 700;
+}
+
+.topbar-note a:hover {
+  color: var(--accent);
 }
 
 .hero {
@@ -346,6 +377,17 @@ code {
 .button-secondary:hover {
   border-color: var(--line-strong);
   background: rgba(255, 255, 255, 0.04);
+}
+
+.button-star {
+  color: var(--text-1);
+  border-color: rgba(196, 243, 107, 0.28);
+  background: rgba(196, 243, 107, 0.1);
+}
+
+.button-star:hover {
+  border-color: rgba(196, 243, 107, 0.4);
+  background: rgba(196, 243, 107, 0.16);
 }
 
 .hero-tags {
@@ -757,6 +799,32 @@ code {
   background: var(--surface);
 }
 
+.repo-support-note,
+.github-strip {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.repo-support-note {
+  margin: 18px 0;
+  padding: 20px;
+}
+
+.repo-support-note strong,
+.github-strip strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-1);
+}
+
+.repo-support-note p,
+.github-strip p {
+  margin: 0;
+  color: var(--text-2);
+  line-height: 1.72;
+}
+
 .changelog-meta {
   display: flex;
   align-items: center;
@@ -772,6 +840,15 @@ code {
 .faq-list {
   display: grid;
   gap: 14px;
+}
+
+.github-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  margin-top: 18px;
+  padding: 24px;
 }
 
 .faq-item {
@@ -884,6 +961,10 @@ code {
   .nav-links {
     display: none;
   }
+
+  .topbar-note {
+    display: none;
+  }
 }
 
 @media (max-width: 760px) {
@@ -918,9 +999,14 @@ code {
   .feature-card,
   .download-card,
   .download-utility,
+  .github-strip,
   .changelog-panel,
   .cta-card {
     padding: 22px;
+  }
+
+  .github-strip {
+    grid-template-columns: 1fr;
   }
 }
 
