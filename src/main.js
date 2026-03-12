@@ -12,9 +12,9 @@ const brandMark = `
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseTag = 'v1.0.5';
-const releaseVersionLabel = '1.0.5';
-const releaseBuildLabel = '2026-03-11';
+const releaseTag = 'v1.0.6';
+const releaseVersionLabel = '1.0.6';
+const releaseBuildLabel = '2026-03-12';
 const repoPage = `https://github.com/${releaseOwner}/${releaseRepo}`;
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/latest/download`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
@@ -27,99 +27,84 @@ const downloads = {
   checksums: `${releaseBase}/OpenClawManagerNative-latest-SHA256SUMS.txt`,
 };
 
-const releaseHighlights = [
-  {
-    title: '降低排错门槛',
-    text: '把目录、配置、Gateway、环境这些本地问题收进图形界面，不再先靠命令行排查。'
-  },
-  {
-    title: '让普通用户也能修',
-    text: '常见动作已经按钮化：配置校验、官方 doctor、官方修复、Gateway 服务重装都能直接点。'
-  },
-  {
-    title: '本地问题，本地处理',
-    text: '配置和状态都留在自己的 Mac 上，适合把 OpenClaw 交给团队成员或非技术用户使用。'
-  }
-];
-
 const capabilityCards = [
   {
     index: '01',
-    title: '把本地问题集中到一页',
-    text: 'OpenClaw 常见故障往往不是模型本身，而是目录、配置、Gateway、服务或环境波动。这个 app 把它们收进同一个诊断视图。'
+    title: '看本地状态',
+    text: '集中查看目录、配置、Gateway、服务、环境和 profile 状态。'
   },
   {
     index: '02',
-    title: '把修复动作做成按钮',
-    text: '看状态，点修复。官方体检、官方修复、Gateway 服务重装和稳定守护都能直接执行，不用自己拼命令。'
+    title: '执行修复',
+    text: '直接执行配置校验、doctor、修复、服务重装和稳定守护。'
   },
   {
     index: '03',
-    title: '顺手也把 profile 管理做好',
-    text: '除了排错，它也会把 .openclaw 和 .openclaw-* 收进一个视图里，方便切换 active profile 和查看 provider 状态。'
+    title: '管理账号池',
+    text: '统一查看 .openclaw 和 .openclaw-*，切换 active profile。'
   }
 ];
 
 const workflowSteps = [
   {
     step: 'STEP 01',
-    title: '先安装到 Applications',
-    text: '优先下载 DMG。第一次打开如果被系统拦截，到“隐私与安全性”里允许一次。'
+    title: '安装',
+    text: '优先下载 DMG，拖到 Applications。'
   },
   {
     step: 'STEP 02',
-    title: '确认 OpenClaw 根目录',
-    text: '选择包含 .openclaw / .openclaw-* 的父目录。很多“看起来像坏了”的问题，其实只是目录选错。'
+    title: '选择根目录',
+    text: '选择包含 .openclaw / .openclaw-* 的父目录。'
   },
   {
     step: 'STEP 03',
-    title: '先看诊断结论，再点修复',
-    text: '主界面确认 profile 状态后，直接去诊断页看建议动作。目标不是让你学排错，而是让你把问题修掉。'
+    title: '查看诊断',
+    text: '先看状态，再执行修复动作。'
   }
 ];
 
 const repairCases = [
   {
-    label: '最常见问题 01',
+    label: '01',
     title: '没有显示 profile',
-    text: '先检查是不是选错了目录层级。要选父目录，不要直接选 .openclaw 本身。'
+    text: '先检查根目录是否选到父目录。'
   },
   {
-    label: '最常见问题 02',
+    label: '02',
     title: 'Gateway 不可达',
-    text: '这类问题的常见根因不是模型本身，而是 Gateway 服务异常。诊断页会直接给出体检、修复和服务重装动作。'
+    text: '先看服务状态，再执行体检、修复或重装服务。'
   },
   {
-    label: '最常见问题 03',
-    title: '睡眠、VPN、代理后状态异常',
-    text: '环境波动会影响本地连接和服务状态。诊断页会把环境风险单独列出来，减少误判和无效排查。'
+    label: '03',
+    title: '睡眠、VPN、代理后异常',
+    text: '检查环境风险、代理和最近唤醒。'
   }
 ];
 
 const downloadCards = [
   {
-    label: 'RECOMMENDED',
+    label: 'DMG',
     title: 'DMG 安装包',
-    text: '第一次安装优先用这个。打开后把 app 拖到 Applications。',
-    bullets: ['最适合首次安装', '当前正式支持 Apple Silicon / arm64', '适合绝大多数使用者'],
+    text: '优先使用。',
+    bullets: ['拖到 Applications', 'Apple Silicon / arm64', '首次安装优先'],
     buttonLabel: '下载 DMG',
     href: downloads.dmg,
     primary: true
   },
   {
-    label: 'INSTALLER',
+    label: 'PKG',
     title: 'PKG 安装包',
-    text: '适合习惯安装器流程的人，交付给别人也更容易解释。',
-    bullets: ['更接近传统安装流程', '适合引导式安装', '适合需要安装器的人群'],
+    text: '按安装器流程安装。',
+    bullets: ['安装器流程', '适合分发', '适合引导安装'],
     buttonLabel: '下载 PKG',
     href: downloads.pkg,
     primary: false
   },
   {
-    label: 'DELIVERY',
+    label: 'BUNDLE',
     title: '完整交付包',
-    text: '包含安装包、说明和校验文件，适合直接转发。',
-    bullets: ['附带 QUICKSTART 和使用说明', '附带 SHA256 校验', '适合内部直接分发'],
+    text: '包含安装包和校验文件。',
+    bullets: ['附带说明', '附带 SHA256', '适合转发'],
     buttonLabel: '下载交付包',
     href: downloads.delivery,
     primary: false
@@ -129,7 +114,7 @@ const downloadCards = [
 const faqEntries = [
   {
     question: '这个 app 核心解决什么问题？',
-    answer: '它把 OpenClaw 的本地诊断、修复和维护动作收成图形界面，降低目录、配置、Gateway、日志和环境排查的技术门槛。'
+    answer: '把 OpenClaw 的本地诊断、修复和维护动作收成图形界面。'
   },
   {
     question: '它是官方产品吗？',
@@ -137,7 +122,7 @@ const faqEntries = [
   },
   {
     question: '不会命令行的人能用吗？',
-    answer: '可以。常见的本地体检、修复、服务重装和状态查看都已经收成图形界面。'
+    answer: '可以。常见的体检、修复、服务重装和状态查看都在界面里。'
   },
   {
     question: '现在只能管理 Codex 吗？',
@@ -145,20 +130,27 @@ const faqEntries = [
   },
   {
     question: '第一次打开没看到 profile，先查什么？',
-    answer: '先确认 OpenClaw 根目录是否选到了父目录，然后执行一次“重启服务并刷新窗口”。这是最常见的本地配置问题。'
-  },
-  {
-    question: '最终用户需要 Docker 或额外 runtime 吗？',
-    answer: '不需要。原生版自带 app 所需的本地 runtime，面向最终用户的交付是 .app、.dmg、.pkg、.zip 和完整交付包。'
+    answer: '先确认 OpenClaw 根目录是否选到了父目录。'
   }
 ];
 
 const changelogEntries = [
   {
+    version: 'v1.0.6',
+    date: '2026-03-12',
+    title: '1.0.6 UI 和官网收口',
+    summary: '原生 app 和官网继续删除无用文案，只保留功能、状态、动作和下载入口。',
+    highlights: [
+      '原生 app 去掉顶部大总览卡片，诊断页只保留状态、动作和字段，设置页、命令页、账号池同步压短。',
+      '原生 app 配色从偏蓝切成更暗的石墨绿 / 灰褐色，降低高饱和强调和无意义描边。',
+      '官网删除首屏 GitHub callout、release strip 和底部 CTA，首页收成“功能 / 常见问题 / 下载 / 更新 / FAQ”，GitHub 链接保留。'
+    ]
+  },
+  {
     version: 'v1.0.5',
     date: '2026-03-11',
-    title: '1.0.5 诊断快路径 + 启动链修复',
-    summary: '1.0.5 继续对 1.0.4 做性能收口：普通页面不再全量刷新，support 走缓存快路径，启动前还会清理历史 backend 残留。',
+    title: '1.0.5 性能和启动链修复',
+    summary: '减少全量刷新，增加缓存，清理历史 backend 残留。',
     highlights: [
       '去掉菜单栏 20 秒全量轮询和启动时的重复全量刷新，普通页面只拉 manager，诊断页才拉完整 support。',
       'support summary 增加 10s / 45s / 2min 分层缓存，profile 发现也增加 45 秒 state dir cache。',
@@ -168,8 +160,8 @@ const changelogEntries = [
   {
     version: 'v1.0.4',
     date: '2026-03-11',
-    title: '1.0.4 诊断中心稳定性 + 性能收口',
-    summary: '诊断中心继续收成更直接的本地维护界面，原生壳更稳，安装版刷新也明显更快。',
+    title: '1.0.4 诊断中心稳定性',
+    summary: '收紧诊断流程并降低刷新耗时。',
     highlights: [
       'reopen、菜单栏和弹窗路径改成明确主线程调用，减少桌面端崩溃风险。',
       '诊断页增加“先做这一步 / 最近一次操作 / 维护建议”，官方体检和修复结果改成中文摘要。',
@@ -179,8 +171,8 @@ const changelogEntries = [
   {
     version: 'v1.0.3',
     date: '2026-03-11',
-    title: '1.0.3 文案收紧 + provider-aware 第一阶段',
-    summary: '把 app 里像官网的解释文案全部压短，并开始从 Codex 写死切到 provider-aware。',
+    title: '1.0.3 provider-aware 第一阶段',
+    summary: '开始按 provider / model 识别 profile。',
     highlights: [
       '首页、诊断页和命令页都只保留状态、动作和必要说明。',
       'daemon 开始读取 openclaw.json，识别 primary provider / primary model。',
@@ -191,7 +183,7 @@ const changelogEntries = [
     version: 'v1.0.1',
     date: '2026-03-10',
     title: '1.0.1 诊断热修复',
-    summary: '修复安装版版本展示混淆，并把诊断中心的根因判断和修复动作继续收紧到发布态。',
+    summary: '修复版本展示并更新诊断中心。',
     highlights: [
       '原生 app 版本展示改为直接读取 Bundle 版本。',
       '诊断中心继续保留随机探测窗口、原生 daemon 和根因修复面板。',
@@ -201,8 +193,8 @@ const changelogEntries = [
   {
     version: 'v1.0.0',
     date: '2026-03-10',
-    title: '1.0 正式版发布',
-    summary: '产品线收口为“mac 原生壳 + daemon 核心 + Web 兼容部署”，统一了切换、诊断、守护和分发链路。',
+    title: '1.0.0 正式版',
+    summary: '统一切换、诊断、守护和分发链路。',
     highlights: [
       '账号切换正式收口到 daemon runtime。',
       '自动策略改成时间窗口内随机探测。',
@@ -290,17 +282,6 @@ const faqMarkup = faqEntries
   )
   .join('');
 
-const releaseStripMarkup = releaseHighlights
-  .map(
-    (item, index) => `
-      <article class="release-item reveal reveal-delay-${(index % 3) + 1}">
-        <strong>${item.title}</strong>
-        <p>${item.text}</p>
-      </article>
-    `
-  )
-  .join('');
-
 const initialChangelog = featuredChangelogEntries[0];
 const initialChangelogList = initialChangelog.highlights.map((item) => `<li>${item}</li>`).join('');
 
@@ -314,12 +295,12 @@ app.innerHTML = `
         <span class="brand-mark">${brandMark}</span>
         <span class="brand-copy">
           <strong>OpenClaw Manager Native</strong>
-          <small>OpenClaw 本地诊断与维护</small>
+          <small>OpenClaw 本地维护</small>
         </span>
       </a>
       <nav class="nav-links">
-        <a href="#capabilities">能力</a>
-        <a href="#diagnostics">诊断</a>
+        <a href="#capabilities">功能</a>
+        <a href="#diagnostics">问题</a>
         <a href="#downloads">下载</a>
         <a href="#changelog">更新</a>
         <a href="#faq">FAQ</a>
@@ -331,28 +312,19 @@ app.innerHTML = `
     <main>
       <section class="hero" id="hero">
         <div class="hero-copy reveal reveal-delay-1">
-          <p class="eyebrow">LOCAL DIAGNOSTICS FOR OPENCLAW</p>
-          <div class="hero-callout">
-            <span class="hero-callout-label">GitHub</span>
-            <p>
-              仓库已开源：
-              <a href="${repoPage}" target="_blank" rel="noreferrer">${releaseOwner}/${releaseRepo}</a>
-              。如果这个项目对你有用，欢迎点个 Star。
-            </p>
-          </div>
-          <h1>降低 OpenClaw 的本地维护门槛。<span>状态可见，修复可执行。</span></h1>
+          <h1>OpenClaw 本地诊断与维护</h1>
           <p class="hero-text">
-            OpenClaw 的许多问题发生在本地环境：目录配置、Gateway 服务、代理网络和系统状态。这个 app 把这些诊断与修复步骤收成图形界面，降低维护和交付成本。
+            查看目录、配置、Gateway、服务、环境和 profile 状态，直接执行修复动作。
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#downloads">下载 ${releaseVersionLabel}</a>
-            <a class="button button-secondary" href="#diagnostics">看诊断怎么用</a>
+            <a class="button button-secondary" href="${repoPage}" target="_blank" rel="noreferrer">GitHub</a>
           </div>
           <ul class="hero-tags">
-            <li>本地诊断</li>
-            <li>维护动作可执行</li>
-            <li>状态集中展示</li>
-            <li>profile 管理</li>
+            <li>目录</li>
+            <li>Gateway</li>
+            <li>环境</li>
+            <li>Profile</li>
           </ul>
         </div>
 
@@ -367,36 +339,36 @@ app.innerHTML = `
               </div>
               <div class="window-grid">
                 <article class="window-card window-card-primary">
-                  <span class="signal-label">DIAGNOSTICS</span>
+                  <span class="signal-label">状态</span>
                   <div class="signal-row">
-                    <strong>问题已定位</strong>
+                    <strong>本地状态</strong>
                     <span class="status-pill status-pill-healthy">Healthy</span>
                   </div>
-                  <p>目录、配置、Gateway 和环境状态都收进同一页，不用先翻日志。</p>
+                  <p>目录、配置、Gateway、环境。</p>
                 </article>
 
                 <article class="window-card window-card-compact">
-                  <span class="signal-label">一键修复</span>
-                  <strong>能看，也能修</strong>
-                  <p>官方体检、官方修复、服务重装都在同一页。</p>
+                  <span class="signal-label">修复</span>
+                  <strong>直接修复</strong>
+                  <p>校验、doctor、修复、重装服务。</p>
                 </article>
 
                 <article class="window-card window-card-compact">
-                  <span class="signal-label">给普通用户</span>
-                  <strong>不依赖命令行</strong>
-                  <p>目标是缩短本地问题的定位和修复路径。</p>
+                  <span class="signal-label">环境</span>
+                  <strong>环境状态</strong>
+                  <p>代理、VPN、睡眠恢复。</p>
                 </article>
 
                 <article class="window-card window-card-compact">
-                  <span class="signal-label">PROFILE</span>
-                  <strong>顺手也把账号管好</strong>
-                  <p>.openclaw 和 .openclaw-* 会被统一收进一个视图。</p>
+                  <span class="signal-label">账号池</span>
+                  <strong>账号池</strong>
+                  <p>.openclaw 和 .openclaw-*。</p>
                 </article>
 
                 <article class="terminal-card">
                   <code>[daemon] profile scan complete provider=openclaw</code>
                   <code>[support] action=doctor-fix summary=ready</code>
-                  <code>[release] latest=v1.0.5 dmg pkg delivery checksums</code>
+                  <code>[release] latest=v1.0.6 dmg pkg delivery checksums</code>
                 </article>
               </div>
             </div>
@@ -404,15 +376,9 @@ app.innerHTML = `
         </div>
       </section>
 
-      <section class="release-strip" aria-label="产品定位">
-        ${releaseStripMarkup}
-      </section>
-
       <section class="section capabilities" id="capabilities">
         <div class="section-heading reveal">
-          <p class="eyebrow">CORE VALUE</p>
-          <h2>把 OpenClaw 的本地诊断和维护收进一个 app。</h2>
-          <p>它不是替代 OpenClaw 本身，而是把本地排查、修复和切换流程收口，降低使用与交付门槛。</p>
+          <h2>功能</h2>
         </div>
         <div class="card-grid">
           ${capabilityMarkup}
@@ -421,15 +387,12 @@ app.innerHTML = `
 
       <section class="section operations-section" id="diagnostics">
         <div class="section-heading reveal">
-          <p class="eyebrow">WORKFLOW + DIAGNOSTICS</p>
-          <h2>先确认环境，再执行修复。</h2>
-          <p>目录、Gateway、服务和环境问题都应该在界面里直接定位，而不是让用户先依赖命令行和日志排查。</p>
+          <h2>常见问题</h2>
         </div>
         <div class="operations-layout">
           <article class="workflow-panel">
             <div class="panel-heading reveal">
-              <span class="panel-kicker">第一次使用</span>
-              <h3>三步把环境看清楚</h3>
+              <h3>安装和配置</h3>
             </div>
             <ol class="workflow-list">
               ${workflowMarkup}
@@ -438,8 +401,7 @@ app.innerHTML = `
 
           <article class="repair-panel">
             <div class="panel-heading reveal reveal-delay-1">
-              <span class="panel-kicker">遇到问题时</span>
-              <h3>先排这几类本地问题</h3>
+              <h3>先看这几类问题</h3>
             </div>
             <div class="repair-grid">
               ${repairMarkup}
@@ -454,9 +416,8 @@ app.innerHTML = `
 
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
-          <p class="eyebrow">DOWNLOADS</p>
-          <h2>先下 DMG；要转发别人，就发完整交付包。</h2>
-          <p>如果你想把 OpenClaw 交给非技术用户或团队成员使用，这个 app 就是那层降低本地维护成本的壳。</p>
+          <h2>下载</h2>
+          <p>DMG 优先。其他包按需下载。</p>
         </div>
         <div class="download-grid">
           ${downloadMarkup}
@@ -467,8 +428,8 @@ app.innerHTML = `
             <p>${releaseVersionLabel} · ${releaseBuildLabel}</p>
           </div>
           <div>
-            <strong>次要入口</strong>
-            <p>熟悉 Mac 的用户可以直接拿 ZIP；校验和完整变更记录也保留。</p>
+            <strong>其他文件</strong>
+            <p>ZIP、SHA256 和 GitHub Release。</p>
           </div>
           <div class="download-actions">
             <a class="button button-secondary" href="${downloads.zip}" target="_blank" rel="noreferrer">下载 ZIP</a>
@@ -480,9 +441,7 @@ app.innerHTML = `
 
       <section class="section changelog-section" id="changelog">
         <div class="section-heading reveal">
-          <p class="eyebrow">UPDATES</p>
-          <h2>首页只看最近几版。</h2>
-          <p>更早的历史放到 GitHub Release，不再在首页摊满整条时间线。</p>
+          <h2>更新记录</h2>
         </div>
         <div class="changelog-layout">
           <div class="changelog-rail reveal reveal-delay-1">
@@ -497,7 +456,7 @@ app.innerHTML = `
             <p class="changelog-summary" data-changelog-summary>${initialChangelog.summary}</p>
             <ul class="changelog-list" data-changelog-list>${initialChangelogList}</ul>
             <div class="download-actions">
-              <a class="button button-secondary" href="${releasePage}" target="_blank" rel="noreferrer">看完整 Release</a>
+              <a class="button button-secondary" href="${releasePage}" target="_blank" rel="noreferrer">GitHub Release</a>
             </div>
           </article>
         </div>
@@ -505,26 +464,10 @@ app.innerHTML = `
 
       <section class="section faq-section" id="faq">
         <div class="section-heading reveal">
-          <p class="eyebrow">FAQ</p>
-          <h2>先把“它到底解决什么”说清楚。</h2>
+          <h2>常见问题</h2>
         </div>
         <div class="faq-list">
           ${faqMarkup}
-        </div>
-      </section>
-
-      <section class="cta-section reveal" id="cta">
-        <div class="cta-card">
-          <p class="eyebrow">READY TO INSTALL</p>
-          <h2>降低 OpenClaw 的本地维护门槛。</h2>
-          <p>自己安装，先下 DMG；要发给别人，直接发完整交付包，让团队成员也能更容易维护本地环境。</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="${downloads.dmg}" target="_blank" rel="noreferrer">下载 DMG</a>
-            <a class="button button-secondary" href="${downloads.delivery}" target="_blank" rel="noreferrer">完整交付包</a>
-          </div>
-          <p class="cta-meta">
-            仓库地址：<a href="${repoPage}" target="_blank" rel="noreferrer">${repoPage}</a>。如果这个项目对你有用，欢迎点个 Star。
-          </p>
         </div>
       </section>
     </main>
