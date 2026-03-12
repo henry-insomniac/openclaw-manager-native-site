@@ -762,6 +762,12 @@ code {
   color: var(--text-1);
 }
 
+.download-meta-note {
+  margin-top: 6px;
+  color: var(--text-3);
+  font-size: 0.92rem;
+}
+
 .changelog-layout {
   display: grid;
   grid-template-columns: minmax(300px, 340px) minmax(0, 1fr);

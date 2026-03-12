@@ -453,6 +453,7 @@ app.innerHTML = `
           <div>
             <strong>当前版本</strong>
             <p>${releaseVersionLabel} · ${releaseBuildLabel}</p>
+            <p class="download-meta-note">其他版本正在开发中。</p>
           </div>
           <div>
             <strong>GitHub 仓库</strong>
