@@ -12,19 +12,19 @@ const brandMark = `
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseTag = 'v1.0.6';
-const releaseVersionLabel = '1.0.6';
+const releaseTag = 'v1.0.7';
+const releaseVersionLabel = '1.0.7';
 const releaseBuildLabel = '2026-03-12';
 const repoPage = `https://github.com/${releaseOwner}/${releaseRepo}`;
-const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/latest/download`;
+const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
 
 const downloads = {
-  dmg: `${releaseBase}/OpenClawManagerNative-latest-arm64.dmg`,
-  pkg: `${releaseBase}/OpenClawManagerNative-latest-arm64.pkg`,
-  zip: `${releaseBase}/OpenClawManagerNative-latest-arm64.zip`,
-  delivery: `${releaseBase}/OpenClawManagerNative-latest-delivery.zip`,
-  checksums: `${releaseBase}/OpenClawManagerNative-latest-SHA256SUMS.txt`,
+  dmg: `${releaseBase}/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64.dmg`,
+  pkg: `${releaseBase}/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64.pkg`,
+  zip: `${releaseBase}/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64-mac.zip`,
+  delivery: `${releaseBase}/OpenClawManagerNative-${releaseVersionLabel}-delivery.zip`,
+  checksums: `${releaseBase}/OpenClawManagerNative-${releaseVersionLabel}-SHA256SUMS.txt`,
 };
 
 const capabilityCards = [
@@ -135,6 +135,17 @@ const faqEntries = [
 ];
 
 const changelogEntries = [
+  {
+    version: 'v1.0.7',
+    date: '2026-03-12',
+    title: '1.0.7 机器监控和性能修复',
+    summary: '新增机器监控页、动态趋势和进程视图，同时把启动和缓存过期时的多秒级卡顿收掉。',
+    highlights: [
+      '新增独立机器监控页，支持 CPU、内存压力、swap、磁盘、网络、占用前 10 进程和 Activity Monitor 跳转。',
+      '顶部工具栏增加全局机器速览和动态趋势图，诊断文案从“风险”改成更中性的“状态 / 因素”表达。',
+      '启动改成 staged loading，support / machine 非 fresh 路径改成 stale-while-revalidate，普通读取不再因为 TTL 过期卡住 2 到 4 秒。'
+    ]
+  },
   {
     version: 'v1.0.6',
     date: '2026-03-12',
@@ -368,7 +379,7 @@ app.innerHTML = `
                 <article class="terminal-card">
                   <code>[daemon] profile scan complete provider=openclaw</code>
                   <code>[support] action=doctor-fix summary=ready</code>
-                  <code>[release] latest=v1.0.6 dmg pkg delivery checksums</code>
+                  <code>[release] tag=${releaseTag} dmg pkg delivery checksums</code>
                 </article>
               </div>
             </div>
