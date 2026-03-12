@@ -606,7 +606,7 @@ code {
 }
 
 .card-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .feature-card,
@@ -799,8 +799,7 @@ code {
   background: var(--surface);
 }
 
-.repo-support-note,
-.github-strip {
+.repo-support-note {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.03);
@@ -811,15 +810,13 @@ code {
   padding: 20px;
 }
 
-.repo-support-note strong,
-.github-strip strong {
+.repo-support-note strong {
   display: block;
   margin-bottom: 8px;
   color: var(--text-1);
 }
 
-.repo-support-note p,
-.github-strip p {
+.repo-support-note p {
   margin: 0;
   color: var(--text-2);
   line-height: 1.72;
@@ -840,15 +837,6 @@ code {
 .faq-list {
   display: grid;
   gap: 14px;
-}
-
-.github-strip {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 18px;
-  align-items: center;
-  margin-top: 18px;
-  padding: 24px;
 }
 
 .faq-item {
@@ -999,14 +987,9 @@ code {
   .feature-card,
   .download-card,
   .download-utility,
-  .github-strip,
   .changelog-panel,
   .cta-card {
     padding: 22px;
-  }
-
-  .github-strip {
-    grid-template-columns: 1fr;
   }
 }
 

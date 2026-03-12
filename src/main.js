@@ -30,18 +30,23 @@ const downloads = {
 const capabilityCards = [
   {
     index: '01',
-    title: '看本地状态',
+    title: '本地状态',
     text: '集中查看目录、配置、Gateway、服务、环境和 profile 状态。'
   },
   {
     index: '02',
-    title: '执行修复',
-    text: '直接执行配置校验、doctor、修复、服务重装和稳定守护。'
+    title: '机器监控面板',
+    text: '集中呈现 CPU、内存压力、Swap、磁盘状态、网络吞吐、动态趋势及高占用进程信息。'
   },
   {
     index: '03',
-    title: '管理账号池',
-    text: '统一查看 .openclaw 和 .openclaw-*，切换 active profile。'
+    title: '维护动作',
+    text: '可直接执行配置校验、doctor、修复、服务重装和稳定守护。'
+  },
+  {
+    index: '04',
+    title: '账号池管理',
+    text: '统一查看 .openclaw 和 .openclaw-*，并执行 active profile 切换。'
   }
 ];
 
@@ -131,6 +136,10 @@ const faqEntries = [
   {
     question: '第一次打开没看到 profile，先查什么？',
     answer: '先确认 OpenClaw 根目录是否选到了父目录。'
+  },
+  {
+    question: '监控面板提供哪些信息？',
+    answer: '监控面板集中呈现 CPU、内存压力、Swap、磁盘剩余、网络吞吐、动态趋势及高占用进程信息，便于持续观察本机资源状态。'
   }
 ];
 
@@ -317,10 +326,10 @@ app.innerHTML = `
         <a href="#faq">FAQ</a>
         <a href="${repoPage}" target="_blank" rel="noreferrer">GitHub</a>
       </nav>
-      <div class="topbar-tools">
+        <div class="topbar-tools">
         <div class="topbar-note">
-          <span>更新先发 GitHub</span>
-          <a href="${repoPage}" target="_blank" rel="noreferrer">GitHub Star</a>
+          <span>版本更新</span>
+          <a href="${repoPage}" target="_blank" rel="noreferrer">GitHub</a>
         </div>
         <a class="nav-cta" href="#downloads">下载 ${releaseVersionLabel}</a>
       </div>
@@ -396,6 +405,7 @@ app.innerHTML = `
       <section class="section capabilities" id="capabilities">
         <div class="section-heading reveal">
           <h2>功能</h2>
+          <p>当前版本已加入独立机器监控面板，用于持续查看本机资源状态、变化趋势及高占用进程。</p>
         </div>
         <div class="card-grid">
           ${capabilityMarkup}
@@ -434,7 +444,7 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <h2>下载</h2>
-          <p>DMG 优先。其他包按需下载。</p>
+          <p>推荐使用 DMG，其他安装包可按需下载。</p>
         </div>
         <div class="download-grid">
           ${downloadMarkup}
@@ -445,13 +455,13 @@ app.innerHTML = `
             <p>${releaseVersionLabel} · ${releaseBuildLabel}</p>
           </div>
           <div>
-            <strong>先看 GitHub</strong>
-            <p>想先看源码、更新节奏和已知问题，可以先去 GitHub。安装后觉得有用，欢迎点个 Star。</p>
+            <strong>GitHub 仓库</strong>
+            <p>如需查看源码、更新记录及已知问题，请访问 GitHub 仓库。如认可本项目，可在 GitHub 标记 Star。</p>
           </div>
           <div class="download-actions">
             <a class="button button-secondary" href="${downloads.zip}" target="_blank" rel="noreferrer">下载 ZIP</a>
             <a class="button button-secondary" href="${downloads.checksums}" target="_blank" rel="noreferrer">SHA256</a>
-            <a class="button button-secondary" href="${repoPage}" target="_blank" rel="noreferrer">先看 GitHub</a>
+            <a class="button button-secondary" href="${repoPage}" target="_blank" rel="noreferrer">访问 GitHub</a>
           </div>
         </div>
       </section>
@@ -473,12 +483,12 @@ app.innerHTML = `
             <p class="changelog-summary" data-changelog-summary>${initialChangelog.summary}</p>
             <ul class="changelog-list" data-changelog-list>${initialChangelogList}</ul>
             <div class="repo-support-note">
-              <strong>更新先发 GitHub</strong>
-              <p>版本更新、修复细节和后续计划都先发 GitHub。这个工具如果帮你省了时间，欢迎去 GitHub 点个 Star。</p>
+              <strong>版本发布与更新记录以 GitHub 为准</strong>
+              <p>版本更新、修复细节及后续计划均优先发布于 GitHub。如认可本项目，可在 GitHub 标记 Star。</p>
             </div>
             <div class="download-actions">
               <a class="button button-secondary" href="${releasePage}" target="_blank" rel="noreferrer">看 Release</a>
-              <a class="button button-star" href="${repoPage}" target="_blank" rel="noreferrer">去 GitHub Star</a>
+              <a class="button button-star" href="${repoPage}" target="_blank" rel="noreferrer">前往 GitHub 标记 Star</a>
             </div>
           </article>
         </div>
@@ -490,15 +500,6 @@ app.innerHTML = `
         </div>
         <div class="faq-list">
           ${faqMarkup}
-        </div>
-        <div class="github-strip reveal">
-          <div>
-            <strong>安装后觉得有用？</strong>
-            <p>如果这个工具帮你省了时间，欢迎去 GitHub 点个 Star。后续更新和修复记录也会先发在那里。</p>
-          </div>
-          <div class="download-actions">
-            <a class="button button-star" href="${repoPage}" target="_blank" rel="noreferrer">去 GitHub Star</a>
-          </div>
         </div>
       </section>
     </main>
