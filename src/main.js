@@ -12,8 +12,8 @@ const brandMark = `
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseTag = 'v1.1.0';
-const releaseVersionLabel = '1.1.0';
+const releaseTag = 'v1.1.1';
+const releaseVersionLabel = '1.1.1';
 const releaseBuildLabel = '2026-03-13';
 const repoPage = `https://github.com/${releaseOwner}/${releaseRepo}`;
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
@@ -76,8 +76,8 @@ const repairCases = [
   },
   {
     label: '02',
-    title: '需要挂载额外技能目录',
-    text: '直接到设置页追加 extraDirs，不需要手改默认 profile 配置。'
+    title: '切换 profile 后技能突然不见',
+    text: '升级到 1.1.1 后，profile 同步会保留 skills 配置，并自动补回 Manager 托管目录。'
   },
   {
     label: '03',
@@ -127,7 +127,7 @@ const faqEntries = [
   },
   {
     question: '这一版最重要的变化是什么？',
-    answer: '1.1.0 的重点是可视化管理 skills：市场、库存、安装、卸载、启停和配置编辑都进了原生 UI。'
+    answer: '1.1.1 是 hotfix，重点修复切换 active profile 后 manager-owned skills 因 extraDirs 被覆盖而失效的问题。'
   },
   {
     question: '不会命令行的人能用吗？',
@@ -144,6 +144,17 @@ const faqEntries = [
 ];
 
 const changelogEntries = [
+  {
+    version: 'v1.1.1',
+    date: '2026-03-13',
+    title: '1.1.1 Skills 挂载热修复',
+    summary: '修复切换 active profile 后 manager-owned skills 挂载目录可能被同步链路抹掉，导致已安装技能在运行时整体不可见的问题。',
+    highlights: [
+      'profile 同步到默认 openclaw.json 时开始保留顶层 skills 配置，不再把 extraDirs、entries 和相关 watcher / install 设置整段覆盖掉。',
+      'daemon 在构建 skills summary / inventory 前会自动检查 Manager 托管目录；如果技能目录仍在但挂载丢失，会自动把 skills-market 重新写回 extraDirs。',
+      '当前 release 继续保留 1.1.0 的技能市场、库存、启停、配置编辑和 active profile 安全编辑能力，只对这次回归做热修复。'
+    ]
+  },
   {
     version: 'v1.1.0',
     date: '2026-03-13',
@@ -416,7 +427,7 @@ app.innerHTML = `
       <section class="section capabilities" id="capabilities">
         <div class="section-heading reveal">
           <h2>功能</h2>
-          <p>当前版本重点从本地诊断扩展到 skills 可视化管理和 active profile 安全编辑。</p>
+          <p>当前版本延续 skills 可视化管理与 active profile 安全编辑，并修复 profile 切换后托管技能挂载丢失的问题。</p>
         </div>
         <div class="card-grid">
           ${capabilityMarkup}
