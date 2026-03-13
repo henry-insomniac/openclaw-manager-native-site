@@ -12,8 +12,8 @@ const brandMark = `
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseTag = 'v1.1.2';
-const releaseVersionLabel = '1.1.2';
+const releaseTag = 'v1.1.3';
+const releaseVersionLabel = '1.1.3';
 const releaseBuildLabel = '2026-03-13';
 const repoPage = `https://github.com/${releaseOwner}/${releaseRepo}`;
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
@@ -76,13 +76,13 @@ const repairCases = [
   },
   {
     label: '02',
-    title: '市场搜索框不好用',
-    text: '升级到 1.1.2 后，原生菜单已经补齐 编辑 / 粘贴 / 全选，同时市场列表改成惰性渲染。'
+    title: '详情页经常超时',
+    text: '1.1.3 已把详情链路收成“直连 ClawHub 详情 + 本地缓存回退”，减少随机超时和整块报错。'
   },
   {
     label: '03',
     title: '切换 profile 后技能突然不见',
-    text: '1.1.1 已修掉 profile 同步覆盖 skills 配置的问题；1.1.2 继续把市场与搜索链路收口到 ClawHub。'
+    text: '1.1.1 已修掉 profile 同步覆盖 skills 配置的问题；1.1.3 继续把市场详情和结果浏览体验收口。'
   }
 ];
 
@@ -127,7 +127,7 @@ const faqEntries = [
   },
   {
     question: '这一版最重要的变化是什么？',
-    answer: '1.1.2 是 skills 市场 hotfix，重点把市场统一切到 ClawHub，并补上粘贴、中文摘要和输入性能修复。'
+    answer: '1.1.3 是 skills 市场详情 hotfix，重点修复详情超时、同 skill 重复请求和结果列表被硬截断的问题。'
   },
   {
     question: '不会命令行的人能用吗？',
@@ -144,6 +144,17 @@ const faqEntries = [
 ];
 
 const changelogEntries = [
+  {
+    version: 'v1.1.3',
+    date: '2026-03-13',
+    title: '1.1.3 Skills 详情热修复',
+    summary: '把 skills 市场详情链路改短，并补上缓存回退、同 skill 防重复请求和渐进展开结果列表，降低详情超时对使用的破坏。',
+    highlights: [
+      'daemon 的详情接口不再为详情额外同步抓取市场榜单，改成直接请求 ClawHub 详情；远端失败时会优先回退到已有详情缓存，其次回退到市场缓存摘要。',
+      '原生壳对同一个 slug 的详情请求增加防重入，并把本地 API 等待时间从默认 8 秒提高到 20 秒，减少用户连续点选时的假性超时。',
+      '市场结果列表不再只是硬截断到 96 / 180 项，而是支持“再显示 N 项 / 显示全部”，同时会把当前详情项自动拉回可见范围。'
+    ]
+  },
   {
     version: 'v1.1.2',
     date: '2026-03-13',
@@ -477,7 +488,7 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <h2>下载</h2>
-          <p>推荐使用 DMG；当前下载入口已切到 GitHub Release ${releaseTag}，对应 1.1.2 hotfix。</p>
+          <p>推荐使用 DMG；当前下载入口已切到 GitHub Release ${releaseTag}，对应 1.1.3 hotfix。</p>
         </div>
         <div class="download-grid">
           ${downloadMarkup}
