@@ -12,8 +12,8 @@ const brandMark = `
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseTag = 'v1.1.1';
-const releaseVersionLabel = '1.1.1';
+const releaseTag = 'v1.1.2';
+const releaseVersionLabel = '1.1.2';
 const releaseBuildLabel = '2026-03-13';
 const repoPage = `https://github.com/${releaseOwner}/${releaseRepo}`;
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
@@ -30,22 +30,22 @@ const downloads = {
 const capabilityCards = [
   {
     index: '01',
-    title: 'Skills 工作台',
-    text: '集中浏览 skills 市场、本地库存，并直接执行安装、卸载、启用和停用。'
+    title: 'ClawHub Skills 市场',
+    text: '统一浏览 ClawHub 热门 skills、远程搜索结果和本地库存，不再混用 GitHub 目录和详情源。'
   },
   {
     index: '02',
+    title: '中文友好摘要',
+    text: '市场卡片和详情页优先展示中文摘要，并保留英文原文折叠区，降低中文用户筛选成本。'
+  },
+  {
+    index: '03',
     title: 'Skills 配置中心',
     text: '直接编辑 extraDirs、目录监听、防抖时间和安装工具偏好，减少手改 openclaw.json。'
   },
   {
-    index: '03',
-    title: 'Active Profile 安全编辑',
-    text: '支持主 Provider、主模型和认证模式的 preview / apply，并带 validate 与自动回滚。'
-  },
-  {
     index: '04',
-    title: '账号池和本地维护',
+    title: 'Active Profile 与本地维护',
     text: '统一查看 .openclaw 和 .openclaw-*，执行 active profile 切换、诊断、修复和守护动作。'
   }
 ];
@@ -76,13 +76,13 @@ const repairCases = [
   },
   {
     label: '02',
-    title: '切换 profile 后技能突然不见',
-    text: '升级到 1.1.1 后，profile 同步会保留 skills 配置，并自动补回 Manager 托管目录。'
+    title: '市场搜索框不好用',
+    text: '升级到 1.1.2 后，原生菜单已经补齐 编辑 / 粘贴 / 全选，同时市场列表改成惰性渲染。'
   },
   {
     label: '03',
-    title: '想改主模型或认证模式',
-    text: '在 Profiles 配置卡里先做 preview，再 apply；失败会自动回滚。'
+    title: '切换 profile 后技能突然不见',
+    text: '1.1.1 已修掉 profile 同步覆盖 skills 配置的问题；1.1.2 继续把市场与搜索链路收口到 ClawHub。'
   }
 ];
 
@@ -127,7 +127,7 @@ const faqEntries = [
   },
   {
     question: '这一版最重要的变化是什么？',
-    answer: '1.1.1 是 hotfix，重点修复切换 active profile 后 manager-owned skills 因 extraDirs 被覆盖而失效的问题。'
+    answer: '1.1.2 是 skills 市场 hotfix，重点把市场统一切到 ClawHub，并补上粘贴、中文摘要和输入性能修复。'
   },
   {
     question: '不会命令行的人能用吗？',
@@ -144,6 +144,17 @@ const faqEntries = [
 ];
 
 const changelogEntries = [
+  {
+    version: 'v1.1.2',
+    date: '2026-03-13',
+    title: '1.1.2 Skills 市场热修复',
+    summary: '把 skills 市场统一切到 ClawHub，并补上搜索框粘贴、中文摘要和输入时的列表渲染性能修复。',
+    highlights: [
+      '市场默认列表和搜索统一切到 ClawHub 官方 API，不再混用 GitHub markdown 目录和 ClawHub 详情链路。',
+      '原生菜单补齐 编辑 / 撤销 / 剪切 / 复制 / 粘贴 / 全选，搜索框终于可以稳定粘贴文本。',
+      '市场 item / detail 新增中文摘要，列表改成惰性渲染，并在默认 browse 场景限制首屏渲染数量，减少输入卡顿。'
+    ]
+  },
   {
     version: 'v1.1.1',
     date: '2026-03-13',
@@ -360,18 +371,18 @@ app.innerHTML = `
     <main>
       <section class="hero" id="hero">
         <div class="hero-copy reveal reveal-delay-1">
-          <h1>OpenClaw Skills 可视化管理与本地配置中心</h1>
+          <h1>OpenClaw Skills 可视化管理与 ClawHub 市场前端</h1>
           <p class="hero-text">
-            直接浏览 skills 市场、本地库存和 active profile 配置，把常见的安装、启停和配置修改从手改 JSON 收到原生界面里。
+            直接浏览 ClawHub skills 市场、本地库存和 active profile 配置，把搜索、安装、启停和配置修改从手改 JSON 收到原生界面里。
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#downloads">下载 ${releaseVersionLabel}</a>
             <a class="button button-secondary" href="${repoPage}" target="_blank" rel="noreferrer">GitHub</a>
           </div>
           <ul class="hero-tags">
-            <li>Skills 市场</li>
+            <li>ClawHub 市场</li>
             <li>本地库存</li>
-            <li>配置中心</li>
+            <li>中文摘要</li>
             <li>Active Profile</li>
           </ul>
         </div>
@@ -392,7 +403,7 @@ app.innerHTML = `
                     <strong>技能工作台</strong>
                     <span class="status-pill status-pill-healthy">Healthy</span>
                   </div>
-                  <p>市场、库存、安装、启停。</p>
+                  <p>ClawHub、库存、安装、启停。</p>
                 </article>
 
                 <article class="window-card window-card-compact">
@@ -403,18 +414,18 @@ app.innerHTML = `
 
                 <article class="window-card window-card-compact">
                   <span class="signal-label">Skills</span>
-                  <strong>配置中心</strong>
-                  <p>extraDirs、watch、install。</p>
+                  <strong>中文摘要</strong>
+                  <p>summaryZh、原文折叠。</p>
                 </article>
 
                 <article class="window-card window-card-compact">
                   <span class="signal-label">账号池</span>
-                  <strong>账号池</strong>
-                  <p>.openclaw 和 .openclaw-*。</p>
+                  <strong>配置中心</strong>
+                  <p>extraDirs、watch、install。</p>
                 </article>
 
                 <article class="terminal-card">
-                  <code>[skills] market inventory install enable preview ready</code>
+                  <code>[skills] clawhub market inventory search zh-summary</code>
                   <code>[profile] active edit validate rollback guarded</code>
                   <code>[release] tag=${releaseTag} dmg pkg delivery checksums</code>
                 </article>
@@ -427,7 +438,7 @@ app.innerHTML = `
       <section class="section capabilities" id="capabilities">
         <div class="section-heading reveal">
           <h2>功能</h2>
-          <p>当前版本延续 skills 可视化管理与 active profile 安全编辑，并修复 profile 切换后托管技能挂载丢失的问题。</p>
+          <p>当前版本把 skills 市场统一切到 ClawHub，并补上中文摘要、搜索粘贴和输入性能热修复。</p>
         </div>
         <div class="card-grid">
           ${capabilityMarkup}
@@ -466,7 +477,7 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <h2>下载</h2>
-          <p>推荐使用 DMG；当前下载入口已切到 GitHub Release ${releaseTag}。</p>
+          <p>推荐使用 DMG；当前下载入口已切到 GitHub Release ${releaseTag}，对应 1.1.2 hotfix。</p>
         </div>
         <div class="download-grid">
           ${downloadMarkup}
