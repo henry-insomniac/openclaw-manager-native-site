@@ -12,9 +12,9 @@ const brandMark = `
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseTag = 'v1.0.7';
-const releaseVersionLabel = '1.0.7';
-const releaseBuildLabel = '2026-03-12';
+const releaseTag = 'v1.1.0';
+const releaseVersionLabel = '1.1.0';
+const releaseBuildLabel = '2026-03-13';
 const repoPage = `https://github.com/${releaseOwner}/${releaseRepo}`;
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
@@ -30,23 +30,23 @@ const downloads = {
 const capabilityCards = [
   {
     index: '01',
-    title: '本地状态',
-    text: '集中查看目录、配置、Gateway、服务、环境和 profile 状态。'
+    title: 'Skills 工作台',
+    text: '集中浏览 skills 市场、本地库存，并直接执行安装、卸载、启用和停用。'
   },
   {
     index: '02',
-    title: '机器监控面板',
-    text: '集中呈现 CPU、内存压力、Swap、磁盘状态、网络吞吐、动态趋势及高占用进程信息。'
+    title: 'Skills 配置中心',
+    text: '直接编辑 extraDirs、目录监听、防抖时间和安装工具偏好，减少手改 openclaw.json。'
   },
   {
     index: '03',
-    title: '维护动作',
-    text: '可直接执行配置校验、doctor、修复、服务重装和稳定守护。'
+    title: 'Active Profile 安全编辑',
+    text: '支持主 Provider、主模型和认证模式的 preview / apply，并带 validate 与自动回滚。'
   },
   {
     index: '04',
-    title: '账号池管理',
-    text: '统一查看 .openclaw 和 .openclaw-*，并执行 active profile 切换。'
+    title: '账号池和本地维护',
+    text: '统一查看 .openclaw 和 .openclaw-*，执行 active profile 切换、诊断、修复和守护动作。'
   }
 ];
 
@@ -58,31 +58,31 @@ const workflowSteps = [
   },
   {
     step: 'STEP 02',
-    title: '选择根目录',
-    text: '选择包含 .openclaw / .openclaw-* 的父目录。'
+    title: '浏览并管理 Skills',
+    text: '进入技能工作台，先看市场和本地库存，再执行安装、启用或卸载。'
   },
   {
     step: 'STEP 03',
-    title: '查看诊断',
-    text: '先看状态，再执行修复动作。'
+    title: '安全编辑 Active Profile',
+    text: '先预览变更，再应用 Provider / 模型 / 认证模式配置。'
   }
 ];
 
 const repairCases = [
   {
     label: '01',
-    title: '没有显示 profile',
-    text: '先检查根目录是否选到父目录。'
+    title: 'Bundled skill 没生效',
+    text: '先在库存里确认是否已“允许并启用”，而不是只装到了本地。'
   },
   {
     label: '02',
-    title: 'Gateway 不可达',
-    text: '先看服务状态，再执行体检、修复或重装服务。'
+    title: '需要挂载额外技能目录',
+    text: '直接到设置页追加 extraDirs，不需要手改默认 profile 配置。'
   },
   {
     label: '03',
-    title: '睡眠、VPN、代理后异常',
-    text: '检查环境风险、代理和最近唤醒。'
+    title: '想改主模型或认证模式',
+    text: '在 Profiles 配置卡里先做 preview，再 apply；失败会自动回滚。'
   }
 ];
 
@@ -119,31 +119,42 @@ const downloadCards = [
 const faqEntries = [
   {
     question: '这个 app 核心解决什么问题？',
-    answer: '把 OpenClaw 的本地诊断、修复和维护动作收成图形界面。'
+    answer: '把 OpenClaw 的本地 skills 管理、配置编辑、诊断和维护动作收成图形界面。'
   },
   {
     question: '它是官方产品吗？',
     answer: '不是。它是面向 OpenClaw 本地工作流的第三方原生工具，不代表官方客户端或官方服务。'
   },
   {
+    question: '这一版最重要的变化是什么？',
+    answer: '1.1.0 的重点是可视化管理 skills：市场、库存、安装、卸载、启停和配置编辑都进了原生 UI。'
+  },
+  {
     question: '不会命令行的人能用吗？',
-    answer: '可以。常见的体检、修复、服务重装和状态查看都在界面里。'
+    answer: '可以。常见的 skills 管理、profile 配置预览和维护动作都已经在界面里。'
   },
   {
     question: '现在只能管理 Codex 吗？',
     answer: '不是。当前已经按 OpenClaw 的 provider / model 识别 profile，Codex 只是第一个 companion runtime。'
   },
   {
-    question: '第一次打开没看到 profile，先查什么？',
-    answer: '先确认 OpenClaw 根目录是否选到了父目录。'
-  },
-  {
-    question: '监控面板提供哪些信息？',
-    answer: '监控面板集中呈现 CPU、内存压力、Swap、磁盘剩余、网络吞吐、动态趋势及高占用进程信息，便于持续观察本机资源状态。'
+    question: '现在可以直接改哪些配置？',
+    answer: '当前已支持 skills 的 extraDirs、watch/watchDebounceMs、install 偏好，以及 active profile 的主 Provider、主模型和认证模式。'
   }
 ];
 
 const changelogEntries = [
+  {
+    version: 'v1.1.0',
+    date: '2026-03-13',
+    title: '1.1.0 Skills 可视化管理',
+    summary: '原生 app 正式进入本地配置中心阶段，重点把 skills 市场、库存、启停和配置编辑收进统一图形界面。',
+    highlights: [
+      '新增技能工作台，支持浏览 skills 市场、本地库存搜索，以及安装、卸载、启用、停用和“允许并启用” bundled skill。',
+      '设置页开始支持可视化编辑 skills.load.extraDirs、watch/watchDebounceMs、install.preferBrew 和 install.nodeManager。',
+      'Profiles 页新增 active profile 安全编辑，支持 provider / model / authMode 的 preview、apply、validate 和失败回滚。'
+    ]
+  },
   {
     version: 'v1.0.7',
     date: '2026-03-12',
@@ -338,19 +349,19 @@ app.innerHTML = `
     <main>
       <section class="hero" id="hero">
         <div class="hero-copy reveal reveal-delay-1">
-          <h1>OpenClaw 本地诊断与维护</h1>
+          <h1>OpenClaw Skills 可视化管理与本地配置中心</h1>
           <p class="hero-text">
-            查看目录、配置、Gateway、服务、环境和 profile 状态，直接执行修复动作。
+            直接浏览 skills 市场、本地库存和 active profile 配置，把常见的安装、启停和配置修改从手改 JSON 收到原生界面里。
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#downloads">下载 ${releaseVersionLabel}</a>
             <a class="button button-secondary" href="${repoPage}" target="_blank" rel="noreferrer">GitHub</a>
           </div>
           <ul class="hero-tags">
-            <li>目录</li>
-            <li>Gateway</li>
-            <li>环境</li>
-            <li>Profile</li>
+            <li>Skills 市场</li>
+            <li>本地库存</li>
+            <li>配置中心</li>
+            <li>Active Profile</li>
           </ul>
         </div>
 
@@ -365,24 +376,24 @@ app.innerHTML = `
               </div>
               <div class="window-grid">
                 <article class="window-card window-card-primary">
-                  <span class="signal-label">状态</span>
+                  <span class="signal-label">Skills</span>
                   <div class="signal-row">
-                    <strong>本地状态</strong>
+                    <strong>技能工作台</strong>
                     <span class="status-pill status-pill-healthy">Healthy</span>
                   </div>
-                  <p>目录、配置、Gateway、环境。</p>
+                  <p>市场、库存、安装、启停。</p>
                 </article>
 
                 <article class="window-card window-card-compact">
-                  <span class="signal-label">修复</span>
-                  <strong>直接修复</strong>
-                  <p>校验、doctor、修复、重装服务。</p>
+                  <span class="signal-label">配置</span>
+                  <strong>安全编辑</strong>
+                  <p>preview、apply、validate。</p>
                 </article>
 
                 <article class="window-card window-card-compact">
-                  <span class="signal-label">环境</span>
-                  <strong>环境状态</strong>
-                  <p>代理、VPN、睡眠恢复。</p>
+                  <span class="signal-label">Skills</span>
+                  <strong>配置中心</strong>
+                  <p>extraDirs、watch、install。</p>
                 </article>
 
                 <article class="window-card window-card-compact">
@@ -392,8 +403,8 @@ app.innerHTML = `
                 </article>
 
                 <article class="terminal-card">
-                  <code>[daemon] profile scan complete provider=openclaw</code>
-                  <code>[support] action=doctor-fix summary=ready</code>
+                  <code>[skills] market inventory install enable preview ready</code>
+                  <code>[profile] active edit validate rollback guarded</code>
                   <code>[release] tag=${releaseTag} dmg pkg delivery checksums</code>
                 </article>
               </div>
@@ -405,7 +416,7 @@ app.innerHTML = `
       <section class="section capabilities" id="capabilities">
         <div class="section-heading reveal">
           <h2>功能</h2>
-          <p>当前版本已加入独立机器监控面板，用于持续查看本机资源状态、变化趋势及高占用进程。</p>
+          <p>当前版本重点从本地诊断扩展到 skills 可视化管理和 active profile 安全编辑。</p>
         </div>
         <div class="card-grid">
           ${capabilityMarkup}
@@ -444,7 +455,7 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <h2>下载</h2>
-          <p>推荐使用 DMG，其他安装包可按需下载。</p>
+          <p>推荐使用 DMG；当前下载入口已切到 GitHub Release ${releaseTag}。</p>
         </div>
         <div class="download-grid">
           ${downloadMarkup}

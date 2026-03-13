@@ -1,6 +1,6 @@
 # OpenClaw Manager Native Site
 
-`OpenClaw Manager Native 1.0.7` 官网单页项目。
+`OpenClaw Manager Native 1.1.0` 官网单页项目。
 
 ## 使用
 
