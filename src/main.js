@@ -12,9 +12,9 @@ const brandMark = `
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseTag = 'v1.1.3';
-const releaseVersionLabel = '1.1.3';
-const releaseBuildLabel = '2026-03-13';
+const releaseTag = 'v1.1.4';
+const releaseVersionLabel = '1.1.4';
+const releaseBuildLabel = '2026-03-16';
 const repoPage = `https://github.com/${releaseOwner}/${releaseRepo}`;
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
@@ -45,8 +45,8 @@ const capabilityCards = [
   },
   {
     index: '04',
-    title: 'Active Profile 与本地维护',
-    text: '统一查看 .openclaw 和 .openclaw-*，执行 active profile 切换、诊断、修复和守护动作。'
+    title: 'Profile 受控编辑与本地维护',
+    text: '统一查看 .openclaw 和 .openclaw-*，执行 profile 切换、诊断、修复，并分别处理当前 / 未激活账号配置。'
   }
 ];
 
@@ -63,8 +63,8 @@ const workflowSteps = [
   },
   {
     step: 'STEP 03',
-    title: '安全编辑 Active Profile',
-    text: '先预览变更，再应用 Provider / 模型 / 认证模式配置。'
+    title: '受控编辑 Profile',
+    text: '当前账号改完会立刻校验；未激活账号先写入自己的配置文件，切换后生效。'
   }
 ];
 
@@ -76,13 +76,13 @@ const repairCases = [
   },
   {
     label: '02',
-    title: '详情页经常超时',
-    text: '1.1.3 已把详情链路收成“直连 ClawHub 详情 + 本地缓存回退”，减少随机超时和整块报错。'
+    title: '全屏后点关闭会黑屏',
+    text: '1.1.4 已把关闭路径改成“先退出 macOS 全屏，再把窗口收回菜单栏”，不再留下黑色全屏壳。'
   },
   {
     label: '03',
-    title: '切换 profile 后技能突然不见',
-    text: '1.1.1 已修掉 profile 同步覆盖 skills 配置的问题；1.1.3 继续把市场详情和结果浏览体验收口。'
+    title: '账号池时效看不懂',
+    text: '1.1.4 已把认证剩余和 5h / 本周额度窗口拆开；token 到期不再混成账号还能用多久。'
   }
 ];
 
@@ -127,7 +127,7 @@ const faqEntries = [
   },
   {
     question: '这一版最重要的变化是什么？',
-    answer: '1.1.3 是 skills 市场详情 hotfix，重点修复详情超时、同 skill 重复请求和结果列表被硬截断的问题。'
+    answer: '1.1.4 重点修复全屏关闭黑屏，并把账号池里的认证时效和额度窗口彻底拆清楚。'
   },
   {
     question: '不会命令行的人能用吗？',
@@ -139,11 +139,22 @@ const faqEntries = [
   },
   {
     question: '现在可以直接改哪些配置？',
-    answer: '当前已支持 skills 的 extraDirs、watch/watchDebounceMs、install 偏好，以及 active profile 的主 Provider、主模型和认证模式。'
+    answer: '当前已支持 skills 的 extraDirs、watch/watchDebounceMs、install 偏好，以及 profile 的主 Provider、主模型和认证模式；未激活账号也能先预览再写入。'
   }
 ];
 
 const changelogEntries = [
+  {
+    version: 'v1.1.4',
+    date: '2026-03-16',
+    title: '1.1.4 全屏关闭和账号池语义修复',
+    summary: '修复全屏关闭黑屏，并把账号池里的 token 过期、认证时效和 quota 窗口拆开；同时补齐 inactive profile 的受控编辑闭环。',
+    highlights: [
+      '原生壳把“全屏态点关闭”改成先退出 macOS full screen，再把主窗口收回菜单栏，不再留下黑色全屏壳，同时保留菜单栏常驻。',
+      '账号池把原先容易误解的“剩余时效”改成认证语义，并补出明确的到期时间；5h / week 配额窗口继续单独展示，不再和 token TTL 混在一起。',
+      'Profiles 页的受控编辑扩到 inactive profile，支持先预览、再写入自己的 openclaw.json；切到这个账号后再按新配置运行。'
+    ]
+  },
   {
     version: 'v1.1.3',
     date: '2026-03-13',
@@ -382,9 +393,9 @@ app.innerHTML = `
     <main>
       <section class="hero" id="hero">
         <div class="hero-copy reveal reveal-delay-1">
-          <h1>OpenClaw Skills 可视化管理与 ClawHub 市场前端</h1>
+          <h1>OpenClaw 本地维护、Skills 管理与 ClawHub 市场</h1>
           <p class="hero-text">
-            直接浏览 ClawHub skills 市场、本地库存和 active profile 配置，把搜索、安装、启停和配置修改从手改 JSON 收到原生界面里。
+            直接浏览 ClawHub skills 市场、本地库存和 profile 配置，把搜索、安装、启停、受控编辑和本地维护从手改 JSON 收到原生界面里。
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#downloads">下载 ${releaseVersionLabel}</a>
@@ -394,7 +405,7 @@ app.innerHTML = `
             <li>ClawHub 市场</li>
             <li>本地库存</li>
             <li>中文摘要</li>
-            <li>Active Profile</li>
+            <li>受控编辑</li>
           </ul>
         </div>
 
@@ -419,7 +430,7 @@ app.innerHTML = `
 
                 <article class="window-card window-card-compact">
                   <span class="signal-label">配置</span>
-                  <strong>安全编辑</strong>
+                  <strong>受控编辑</strong>
                   <p>preview、apply、validate。</p>
                 </article>
 
@@ -437,7 +448,7 @@ app.innerHTML = `
 
                 <article class="terminal-card">
                   <code>[skills] clawhub market inventory search zh-summary</code>
-                  <code>[profile] active edit validate rollback guarded</code>
+                  <code>[profile] active inactive edit validate rollback</code>
                   <code>[release] tag=${releaseTag} dmg pkg delivery checksums</code>
                 </article>
               </div>
@@ -449,7 +460,7 @@ app.innerHTML = `
       <section class="section capabilities" id="capabilities">
         <div class="section-heading reveal">
           <h2>功能</h2>
-          <p>当前版本把 skills 市场统一切到 ClawHub，并补上中文摘要、搜索粘贴和输入性能热修复。</p>
+          <p>当前版本重点修复全屏关闭黑屏，并把认证时效和额度窗口拆清楚；skills 市场和本地维护能力继续保留。</p>
         </div>
         <div class="card-grid">
           ${capabilityMarkup}
@@ -488,7 +499,7 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <h2>下载</h2>
-          <p>推荐使用 DMG；当前下载入口已切到 GitHub Release ${releaseTag}，对应 1.1.3 hotfix。</p>
+          <p>推荐使用 DMG；当前下载入口已切到 GitHub Release ${releaseTag}，对应 1.1.4 修复版。</p>
         </div>
         <div class="download-grid">
           ${downloadMarkup}
