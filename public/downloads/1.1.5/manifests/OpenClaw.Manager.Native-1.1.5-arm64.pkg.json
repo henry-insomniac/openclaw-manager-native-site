@@ -1,0 +1,17 @@
+{
+  "filename": "OpenClaw.Manager.Native-1.1.5-arm64.pkg",
+  "mimeType": "application/octet-stream",
+  "size": 9518857,
+  "parts": [
+    "../chunks/pkg/part-000",
+    "../chunks/pkg/part-001",
+    "../chunks/pkg/part-002",
+    "../chunks/pkg/part-003",
+    "../chunks/pkg/part-004",
+    "../chunks/pkg/part-005",
+    "../chunks/pkg/part-006",
+    "../chunks/pkg/part-007",
+    "../chunks/pkg/part-008",
+    "../chunks/pkg/part-009"
+  ]
+}

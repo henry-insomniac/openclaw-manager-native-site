@@ -1,0 +1,17 @@
+{
+  "filename": "OpenClaw.Manager.Native-1.1.5-arm64.dmg",
+  "mimeType": "application/octet-stream",
+  "size": 10232975,
+  "parts": [
+    "../chunks/dmg/part-000",
+    "../chunks/dmg/part-001",
+    "../chunks/dmg/part-002",
+    "../chunks/dmg/part-003",
+    "../chunks/dmg/part-004",
+    "../chunks/dmg/part-005",
+    "../chunks/dmg/part-006",
+    "../chunks/dmg/part-007",
+    "../chunks/dmg/part-008",
+    "../chunks/dmg/part-009"
+  ]
+}

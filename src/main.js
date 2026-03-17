@@ -25,6 +25,8 @@ const downloads = {
   zip: `${downloadBase}/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64-mac.zip`,
   delivery: `${downloadBase}/OpenClawManagerNative-${releaseVersionLabel}-delivery.zip`,
   checksums: `${downloadBase}/OpenClawManagerNative-${releaseVersionLabel}-SHA256SUMS.txt`,
+  dmgManifest: `${downloadBase}/manifests/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64.dmg.json`,
+  pkgManifest: `${downloadBase}/manifests/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64.pkg.json`,
 };
 
 const capabilityCards = [
@@ -88,9 +90,31 @@ const repairCases = [
 
 const downloadCards = [
   {
+    label: 'DMG',
+    title: 'DMG 安装包',
+    text: '优先使用。',
+    bullets: ['拖到 Applications', 'Apple Silicon / arm64', '浏览器会自动拼装下载'],
+    buttonLabel: '下载 DMG',
+    href: downloads.dmgManifest,
+    manifestHref: downloads.dmgManifest,
+    filename: `OpenClaw.Manager.Native-${releaseVersionLabel}-arm64.dmg`,
+    primary: true
+  },
+  {
+    label: 'PKG',
+    title: 'PKG 安装包',
+    text: '按安装器流程安装。',
+    bullets: ['安装器流程', '适合分发', '浏览器会自动拼装下载'],
+    buttonLabel: '下载 PKG',
+    href: downloads.pkgManifest,
+    manifestHref: downloads.pkgManifest,
+    filename: `OpenClaw.Manager.Native-${releaseVersionLabel}-arm64.pkg`,
+    primary: false
+  },
+  {
     label: 'ZIP',
     title: 'ZIP 下载包',
-    text: '当前官网直链可用版本。',
+    text: '无需等待拼装，直接下载。',
     bullets: ['解压后拖到 Applications', 'Apple Silicon / arm64', '配套 SHA256 校验'],
     buttonLabel: '下载 ZIP',
     href: downloads.zip,
@@ -332,7 +356,7 @@ const downloadMarkup = downloadCards
         <p>${card.text}</p>
         <ul class="download-list">${renderBullets(card.bullets)}</ul>
         <div class="download-actions">
-          <a class="button ${card.primary ? 'button-primary' : 'button-secondary'}" href="${card.href}" target="_blank" rel="noreferrer">${card.buttonLabel}</a>
+          <a class="button ${card.primary ? 'button-primary' : 'button-secondary'}" href="${card.href}" ${card.manifestHref ? `data-download-manifest="${card.manifestHref}" data-download-filename="${card.filename}" data-download-label="${card.buttonLabel}"` : 'target="_blank" rel="noreferrer"'}>${card.buttonLabel}</a>
         </div>
       </article>
     `
@@ -492,7 +516,7 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <h2>下载</h2>
-          <p>当前官网直链先提供 ZIP 和 SHA256，对应 1.1.5 修复版；Release 说明仍保留在 GitHub ${releaseTag}。</p>
+          <p>当前官网已恢复 DMG / PKG / ZIP 下载；其中 DMG 和 PKG 会先在浏览器里完成分块拼装，再落成完整安装包。</p>
         </div>
         <div class="download-grid">
           ${downloadMarkup}
@@ -501,7 +525,7 @@ app.innerHTML = `
           <div>
             <strong>当前版本</strong>
             <p>${releaseVersionLabel} · ${releaseBuildLabel}</p>
-            <p class="download-meta-note">当前官网下载以 ZIP 为主，其余安装格式会后续补齐。</p>
+            <p class="download-meta-note">如果 DMG / PKG 下载被浏览器拦截，请先允许当前站点下载多个文件或临时改用 ZIP。</p>
           </div>
           <div>
             <strong>GitHub 仓库</strong>
@@ -561,6 +585,7 @@ const changelogDate = document.querySelector('[data-changelog-date]');
 const changelogTitle = document.querySelector('[data-changelog-title]');
 const changelogSummary = document.querySelector('[data-changelog-summary]');
 const changelogList = document.querySelector('[data-changelog-list]');
+const chunkedDownloadButtons = document.querySelectorAll('[data-download-manifest]');
 
 const setActiveChangelog = (index) => {
   const entry = featuredChangelogEntries[index];
@@ -583,5 +608,83 @@ changelogButtons.forEach((button) => {
   button.addEventListener('click', () => {
     const index = Number(button.dataset.changelogIndex || '0');
     setActiveChangelog(index);
+  });
+});
+
+const activeChunkedDownloads = new WeakSet();
+
+const setChunkedDownloadLabel = (button, label) => {
+  button.textContent = label;
+};
+
+const downloadChunkedAsset = async (button) => {
+  if (activeChunkedDownloads.has(button)) {
+    return;
+  }
+
+  const manifestHref = button.dataset.downloadManifest;
+  const filename = button.dataset.downloadFilename || 'download.bin';
+  const defaultLabel = button.dataset.downloadLabel || button.textContent || '下载';
+  if (!manifestHref) {
+    return;
+  }
+
+  activeChunkedDownloads.add(button);
+  button.setAttribute('aria-busy', 'true');
+  setChunkedDownloadLabel(button, '准备中...');
+
+  try {
+    const manifestUrl = new URL(manifestHref, window.location.href);
+    const manifestResponse = await fetch(manifestUrl);
+    if (!manifestResponse.ok) {
+      throw new Error(`manifest ${manifestResponse.status}`);
+    }
+    const manifest = await manifestResponse.json();
+    const buffers = [];
+    const parts = Array.isArray(manifest.parts) ? manifest.parts : [];
+    if (parts.length === 0) {
+      throw new Error('manifest parts missing');
+    }
+
+    for (let index = 0; index < parts.length; index += 1) {
+      setChunkedDownloadLabel(button, `下载中 ${index + 1}/${parts.length}`);
+      const chunkUrl = new URL(parts[index], manifestUrl);
+      const chunkResponse = await fetch(chunkUrl);
+      if (!chunkResponse.ok) {
+        throw new Error(`chunk ${index + 1} ${chunkResponse.status}`);
+      }
+      buffers.push(await chunkResponse.arrayBuffer());
+    }
+
+    setChunkedDownloadLabel(button, '正在拼装...');
+    const blob = new Blob(buffers, { type: manifest.mimeType || 'application/octet-stream' });
+    const objectUrl = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = objectUrl;
+    anchor.download = manifest.filename || filename;
+    document.body.append(anchor);
+    anchor.click();
+    anchor.remove();
+    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 60_000);
+    setChunkedDownloadLabel(button, '已开始下载');
+    window.setTimeout(() => {
+      if (button.isConnected) {
+        setChunkedDownloadLabel(button, defaultLabel);
+      }
+    }, 1_500);
+  } catch (error) {
+    console.error(error);
+    window.alert('安装包下载失败。请稍后重试；如果仍失败，先使用 ZIP 版本。');
+    setChunkedDownloadLabel(button, defaultLabel);
+  } finally {
+    button.removeAttribute('aria-busy');
+    activeChunkedDownloads.delete(button);
+  }
+};
+
+chunkedDownloadButtons.forEach((button) => {
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    downloadChunkedAsset(button);
   });
 });
