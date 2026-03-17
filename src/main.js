@@ -17,7 +17,8 @@ const releaseVersionLabel = '1.1.5';
 const releaseBuildLabel = '2026-03-17';
 const repoPage = `https://github.com/${releaseOwner}/${releaseRepo}`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
-const downloadBase = `/downloads/${releaseVersionLabel}`;
+const siteBase = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+const downloadBase = `${siteBase}/downloads/${releaseVersionLabel}`;
 
 const downloads = {
   dmg: `${downloadBase}/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64.dmg`,
