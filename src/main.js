@@ -16,15 +16,15 @@ const releaseTag = 'v1.1.5';
 const releaseVersionLabel = '1.1.5';
 const releaseBuildLabel = '2026-03-17';
 const repoPage = `https://github.com/${releaseOwner}/${releaseRepo}`;
-const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
+const downloadBase = `/downloads/${releaseVersionLabel}`;
 
 const downloads = {
-  dmg: `${releaseBase}/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64.dmg`,
-  pkg: `${releaseBase}/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64.pkg`,
-  zip: `${releaseBase}/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64-mac.zip`,
-  delivery: `${releaseBase}/OpenClawManagerNative-${releaseVersionLabel}-delivery.zip`,
-  checksums: `${releaseBase}/OpenClawManagerNative-${releaseVersionLabel}-SHA256SUMS.txt`,
+  dmg: `${downloadBase}/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64.dmg`,
+  pkg: `${downloadBase}/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64.pkg`,
+  zip: `${downloadBase}/OpenClaw.Manager.Native-${releaseVersionLabel}-arm64-mac.zip`,
+  delivery: `${downloadBase}/OpenClawManagerNative-${releaseVersionLabel}-delivery.zip`,
+  checksums: `${downloadBase}/OpenClawManagerNative-${releaseVersionLabel}-SHA256SUMS.txt`,
 };
 
 const capabilityCards = [
@@ -510,7 +510,7 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <h2>下载</h2>
-          <p>推荐使用 DMG；当前下载入口已切到 GitHub Release ${releaseTag}，对应 1.1.5 修复版。</p>
+          <p>推荐使用 DMG；当前下载入口已切到官网直链，对应 1.1.5 修复版，Release 说明仍保留在 GitHub ${releaseTag}。</p>
         </div>
         <div class="download-grid">
           ${downloadMarkup}

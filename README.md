@@ -20,4 +20,4 @@ npm run build
 
 推到 GitHub 仓库后，`main` 分支会通过 `.github/workflows/deploy.yml` 自动构建并发布到 GitHub Pages。
 
-下载链接默认走当前 `releaseTag` 对应的版本化 GitHub Release 资产；当前展示版本、release 标题和 changelog 首条仍在 `src/main.js` 里维护。
+下载链接当前走 `public/downloads/<version>/` 下的官网静态资源；当前展示版本、release 标题和 changelog 首条仍在 `src/main.js` 里维护，`releasePage` 继续指向对应 GitHub Release 页面。
