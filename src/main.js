@@ -12,9 +12,9 @@ const brandMark = `
 
 const releaseOwner = 'henry-insomniac';
 const releaseRepo = 'openclaw-manager-native';
-const releaseTag = 'v1.1.4';
-const releaseVersionLabel = '1.1.4';
-const releaseBuildLabel = '2026-03-16';
+const releaseTag = 'v1.1.5';
+const releaseVersionLabel = '1.1.5';
+const releaseBuildLabel = '2026-03-17';
 const repoPage = `https://github.com/${releaseOwner}/${releaseRepo}`;
 const releaseBase = `https://github.com/${releaseOwner}/${releaseRepo}/releases/download/${releaseTag}`;
 const releasePage = `https://github.com/${releaseOwner}/${releaseRepo}/releases/tag/${releaseTag}`;
@@ -76,13 +76,13 @@ const repairCases = [
   },
   {
     label: '02',
-    title: '全屏后点关闭会黑屏',
-    text: '1.1.4 已把关闭路径改成“先退出 macOS 全屏，再把窗口收回菜单栏”，不再留下黑色全屏壳。'
+    title: '切换后实际跑的是谁',
+    text: '1.1.5 现在会在概览和菜单栏直接显示运行 auth，不用再猜默认位 runtime 最终落在哪个账号。'
   },
   {
     label: '03',
-    title: '账号池时效看不懂',
-    text: '1.1.4 已把认证剩余和 5h / 本周额度窗口拆开；token 到期不再混成账号还能用多久。'
+    title: '刚限流的账号为什么没再被推荐',
+    text: '1.1.5 会把最近命中过 API rate limit 的同账号 profile 暂时标成 cooldown，避免刚切走又马上切回去。'
   }
 ];
 
@@ -127,7 +127,7 @@ const faqEntries = [
   },
   {
     question: '这一版最重要的变化是什么？',
-    answer: '1.1.4 重点修复全屏关闭黑屏，并把账号池里的认证时效和额度窗口彻底拆清楚。'
+    answer: '1.1.5 把默认位 auth 同步扩成多账号运行池，补出运行 auth 可见性，并让最近限流账号短暂退避。'
   },
   {
     question: '不会命令行的人能用吗？',
@@ -144,6 +144,17 @@ const faqEntries = [
 ];
 
 const changelogEntries = [
+  {
+    version: 'v1.1.5',
+    date: '2026-03-17',
+    title: '1.1.5 Runtime auth 池和限流退避',
+    summary: '默认位开始维护多账号 Codex auth pool，界面直接显示当前运行 auth，并让刚限流的账号暂时进入 cooldown，减少切换抖动。',
+    highlights: [
+      'syncProfileToDefault 不再只复制当前 active 账号的 Codex token，而是把所有已发现的 managed Codex profile 汇总成默认位 runtime auth pool，并保持 active-first 顺序。',
+      'daemon 新增 currentAuthSelection，overview 和菜单栏可以直接看到 runtime 最近成功使用的 auth profile，不再只能猜默认位现在实际跑的是谁。',
+      '一旦 gateway 日志里刚出现 API rate limit，manager 会暂时把同账号 profile 标成 cooldown，推荐结果不会立刻切回刚失败的账号。'
+    ]
+  },
   {
     version: 'v1.1.4',
     date: '2026-03-16',
@@ -460,7 +471,7 @@ app.innerHTML = `
       <section class="section capabilities" id="capabilities">
         <div class="section-heading reveal">
           <h2>功能</h2>
-          <p>当前版本重点修复全屏关闭黑屏，并把认证时效和额度窗口拆清楚；skills 市场和本地维护能力继续保留。</p>
+          <p>当前版本重点把默认位 auth 同步扩成多账号运行池，补出运行 auth 可见性，并让最近限流账号暂时退避；skills 市场和本地维护能力继续保留。</p>
         </div>
         <div class="card-grid">
           ${capabilityMarkup}
@@ -499,7 +510,7 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <h2>下载</h2>
-          <p>推荐使用 DMG；当前下载入口已切到 GitHub Release ${releaseTag}，对应 1.1.4 修复版。</p>
+          <p>推荐使用 DMG；当前下载入口已切到 GitHub Release ${releaseTag}，对应 1.1.5 修复版。</p>
         </div>
         <div class="download-grid">
           ${downloadMarkup}
