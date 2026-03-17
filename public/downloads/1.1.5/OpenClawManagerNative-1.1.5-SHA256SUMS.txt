@@ -1,0 +1,4 @@
+d4c3cad058d727b838e2a6d8142831a34f79f41f4b03b2ec4a7df4569a2d76df  OpenClaw.Manager.Native-1.1.5-arm64-mac.zip
+aabd47264e34f7330bb4ccbdb59bd7e5b3096fead41843ab74a4072ab622ccc4  OpenClaw.Manager.Native-1.1.5-arm64.dmg
+aabd47264e34f7330bb4ccbdb59bd7e5b3096fead41843ab74a4072ab622ccc4  OpenClawManagerNative-1.1.5-20260317-141736-arm64.dmg
+16432133a49b53bbcb3eaace6ba49edd68eafd3f15c270d6912e447d83499652  OpenClaw.Manager.Native-1.1.5-arm64.pkg
