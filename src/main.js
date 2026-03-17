@@ -88,30 +88,12 @@ const repairCases = [
 
 const downloadCards = [
   {
-    label: 'DMG',
-    title: 'DMG 安装包',
-    text: '优先使用。',
-    bullets: ['拖到 Applications', 'Apple Silicon / arm64', '首次安装优先'],
-    buttonLabel: '下载 DMG',
-    href: downloads.dmg,
-    primary: true
-  },
-  {
-    label: 'PKG',
-    title: 'PKG 安装包',
-    text: '按安装器流程安装。',
-    bullets: ['安装器流程', '适合分发', '适合引导安装'],
-    buttonLabel: '下载 PKG',
-    href: downloads.pkg,
-    primary: false
-  },
-  {
-    label: 'BUNDLE',
-    title: '完整交付包',
-    text: '包含安装包和校验文件。',
-    bullets: ['附带说明', '附带 SHA256', '适合转发'],
-    buttonLabel: '下载交付包',
-    href: downloads.delivery,
+    label: 'ZIP',
+    title: 'ZIP 下载包',
+    text: '当前官网直链可用版本。',
+    bullets: ['解压后拖到 Applications', 'Apple Silicon / arm64', '配套 SHA256 校验'],
+    buttonLabel: '下载 ZIP',
+    href: downloads.zip,
     primary: false
   }
 ];
@@ -510,7 +492,7 @@ app.innerHTML = `
       <section class="section downloads-section" id="downloads">
         <div class="section-heading reveal">
           <h2>下载</h2>
-          <p>推荐使用 DMG；当前下载入口已切到官网直链，对应 1.1.5 修复版，Release 说明仍保留在 GitHub ${releaseTag}。</p>
+          <p>当前官网直链先提供 ZIP 和 SHA256，对应 1.1.5 修复版；Release 说明仍保留在 GitHub ${releaseTag}。</p>
         </div>
         <div class="download-grid">
           ${downloadMarkup}
@@ -519,7 +501,7 @@ app.innerHTML = `
           <div>
             <strong>当前版本</strong>
             <p>${releaseVersionLabel} · ${releaseBuildLabel}</p>
-            <p class="download-meta-note">其他版本正在开发中。</p>
+            <p class="download-meta-note">当前官网下载以 ZIP 为主，其余安装格式会后续补齐。</p>
           </div>
           <div>
             <strong>GitHub 仓库</strong>
